@@ -1,0 +1,29 @@
+<form class="card card-form" [formGroup]="form" (ngSubmit)="submit()" [ngClass]="{invalid: retry}">
+    <h2 class="form-title">Entering Editor Mode</h2>
+    <div id="form-email" class="form-control" [ngClass]="{invalid: form.get('email')?.touched && form.get('email')?.invalid}">
+        <input id="form-email-input" name="form-email-input" formControlName="email" class="form-input" type="email" placeholder="Email">
+        <label class="form-label" for="form-email-input">Email</label>
+        <div *ngIf="form.get('email')?.touched" class="form-validation">
+            <small *ngIf="form.get('email')?.invalid">not valid email</small>
+        </div>
+    </div>
+    <div id="form-password" class="form-control" [ngClass]="{invalid: form.get('password')?.touched && form.get('password')?.invalid}">
+        <input id="form-password-input" name="form-password-input" formControlName="password" class="form-input" type="password" placeholder="Password">
+        <label class="form-label" for="form-password-input">Password</label>
+        <div *ngIf="form.get('password')?.touched" class="form-validation">
+            <small *ngIf="form.get('password')?.invalid">invalid password format</small>
+        </div>
+    </div>
+    <div class="submit-element">
+        <button class="btn" type="submit" [disabled]="form.invalid || load">submit</button>
+        <button class="btn" type="button" routerLink="/">return</button>
+        <div class="error-description" *ngIf="auth.error$ | async as error" >
+            {{error}}
+        </div>
+        <div class="error-description" *ngIf="queryMessage" >
+            {{queryMessage}}
+        </div>
+    </div>
+    
+
+</form>
