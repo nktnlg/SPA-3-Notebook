@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Note } from 'src/app/shared/interfaces';
+import { NotesService } from 'src/app/shared/notes.service';
 
 @Component({
   selector: 'app-create-page',
@@ -10,6 +11,7 @@ import { Note } from 'src/app/shared/interfaces';
 })
 export class CreatePageComponent implements OnInit{
   form!: FormGroup;
+  constructor(private notesService: NotesService){}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -27,6 +29,12 @@ export class CreatePageComponent implements OnInit{
       author: this.form.value.author,
       date: new Date()
     } 
+    this.notesService.create(note).subscribe(()=>{
+      this.form.reset()
+    })
   }
+
+  
+  
 
 }

@@ -47,7 +47,7 @@ export class LoginPageComponent implements OnInit {
       this.form.reset();
       this.router.navigate(['/admin', 'dashboard']);
       this.load = false
-    }, ()=>{this.retry = true;this.load = false})
+    }, (err)=>{console.log(err);this.retry = true;this.load = false})
     
 
   };

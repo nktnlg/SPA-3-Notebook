@@ -1,3 +1,15 @@
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.snow.css';
+
+
+$text-color: #333;
+$text-secondary-color: #666;
+$base-element-color: #f3f3f3;
+$contrast-element-color: white;
+$hover-base-color: #eee;
+$alert-color: red;
+
+
 body {
     margin: 0;
 }
@@ -8,8 +20,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #f3f3f3;
-    color: #333;
+    background-color: $base-element-color;
+    color: $text-color;
     box-shadow: 0 8px 10px -4px rgb(0 0 0 / 0.1), 0 4px 6px -5px rgb(0 0 0 / 0.1);
     margin-bottom: 1rem;
     width: 100%;
@@ -22,7 +34,7 @@ body {
 
 .header-title{
     a {text-decoration: none;};
-    a:visited {color: #333};
+    a:visited {color: $text-color};
     word-spacing: 0.5rem;
     padding-left: 1rem;
 }
@@ -38,7 +50,7 @@ body {
     align-items: center;
 
     text-decoration: none;
-    color: #666;
+    color: $text-secondary-color;
     padding: 2rem;
 
     text-transform: uppercase;
@@ -53,12 +65,12 @@ body {
 }
 
 .header-option:hover {
-    background-color: #eee;
+    background-color: $hover-base-color;
     font-size: 1rem;
 }
 .active {
     font-size: 1rem;
-    color: #333;
+    color: $text-color;
 }
 
 //content
@@ -66,7 +78,7 @@ body {
 .content {
     margin: 0.75rem;
     padding: 1.5rem;
-    background-color: #f3f3f3;
+    background-color: $base-element-color;
     color: #2a2a2a;
     border-radius: 0.5rem;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -74,7 +86,7 @@ body {
 
 .card {
     padding: 16px;
-    background-color: white;
+    background-color: $contrast-element-color;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     border-radius: 0.5rem;
     
@@ -152,13 +164,13 @@ body {
 
     font-size: 0.875rem; /* 14px */
     line-height: 1.25rem; /* 20px */
-    color: #333;
+    color: $text-color;
 }
 .submit-element{
     display: flex;
 }
 .error-description{
-    color: red;
+    color: $alert-color;
     padding-left: 1rem;
     text-transform: uppercase;
     align-self: center;
@@ -167,11 +179,11 @@ body {
 .form-validation {
     position: absolute;
     padding-top: 0.125rem;
-    color: red;
+    color: r$alert-color;
 }
 
 .invalid {
-    color:red;
+    color:$alert-color;
     h2 {color:#333;}
 }
 
@@ -179,6 +191,14 @@ body {
 //NOTE
 .note-header {
     display: flex;
+}
+
+//TABLE
+.table {
+    width: 100%;
+    border: 2px solid $alert-color;
+    border-radius: 0.5rem;
+    background: $contrast-element-color;
 }
 
 
@@ -193,12 +213,12 @@ body {
     line-height: 1rem; /* 20px */
 
     
-    background-color: white;
+    background-color: $contrast-element-color;
 
     
-    color: #333;
+    color: $text-color;
 
-    border: 1px solid #eee;
+    border: 1px solid $hover-base-color;
     border-radius: 0.5rem;
 
     transition-duration: 500ms;
@@ -206,10 +226,10 @@ body {
 }
 
 .btn:hover {
-    background-color: #eee;
+    background-color: $hover-base-color;
 }
 .btn:disabled {
-    background-color: #eee;
+    background-color: $hover-base-color;
     color: #999;
 }
 
