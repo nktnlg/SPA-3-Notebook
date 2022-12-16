@@ -1,22 +1,22 @@
 <table class="table">
-    <thead class="table-head">
-        <tr>
-            <th >#</th>
-            <th>Author</th>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Actions</th>
+    <thead>
+        <tr class="table-head">
+            <th class="table-head-cell">#</th>
+            <th class="table-head-cell">Author</th>
+            <th class="table-head-cell">Title</th>
+            <th class="table-head-cell">Date</th>
+            <th class="table-head-cell">Actions</th>
         </tr>
     </thead>
     <tbody class="table-body">
         <tr *ngFor="let note of notes; let idx = index">
-            <td>{{idx+1}}</td>
-            <td>{{note.author}}</td>
-            <td>{{note.title}}</td>
-            <td>{{note.date | date: 'medium'}}</td>
-            <td>
-                <button [routerLink]="['/admin', 'note',  note.id, 'edit']">Edit</button>
-                <button>Remove</button>
+            <td class="table-body-cell">{{idx+1}}</td>
+            <td class="table-body-cell">{{note.author}}</td>
+            <td class="table-body-cell">{{note.title}}</td>
+            <td class="table-body-cell">{{note.date | date: 'medium'}}</td>
+            <td class="table-body-cell">
+                <button [routerLink]="['/admin', 'note',  note.id, 'edit']" class="btn">Edit</button>
+                <button class="btn">Remove</button>
             </td>
         </tr>
     </tbody>

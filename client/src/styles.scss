@@ -195,12 +195,47 @@ body {
 
 //TABLE
 .table {
+    font-family: sans-serif;
+
     width: 100%;
-    border: 2px solid $alert-color;
+
+    border-spacing: 0;
+    border: 2px solid $text-secondary-color;
     border-radius: 0.5rem;
     background: $contrast-element-color;
 }
+//table head
+.table-head-cell{
+    background: #999;
+    
+    text-align: start;
+    color: $text-color;
+    padding: 0.5rem;
+    border-right: 1px solid $text-secondary-color;
+    border-bottom: 1px solid $text-secondary-color;
+}
+.table-head .table-head-cell:first-child {
+    border-radius: 0.3rem 0 0 0;
+}
+.table-head .table-head-cell:last-child {
+    border-right: 0;
+    border-radius: 0 0.3rem 0 0;
+}
 
+//table body
+.table-body-cell{
+    text-align: start;
+    color: $text-color;
+    padding: 0.5rem;
+    border-right: 1px solid $text-secondary-color;
+    border-bottom: 1px solid $text-secondary-color;
+}
+.table-body tr:last-child .table-body-cell{
+    border-bottom: 0;
+}
+.table-body .table-body-cell:last-child {
+    border-right: 0;
+}
 
 //buttons
 .btn {
@@ -231,5 +266,26 @@ body {
 .btn:disabled {
     background-color: $hover-base-color;
     color: #999;
+}
+
+
+//FOOTER
+.footer {
+    font-family: sans-serif;
+    margin-top: 1rem;
+    background-color: #f3f3f3;
+    color: #333;
+}
+.footer-bot {
+    padding: 24px;
+    text-align: center;
+    background-color: #eee;
+}
+.link{
+    text-decoration: none;
+    color: #303030;
+}
+.semibold{
+    font-weight: 600;
 }
 

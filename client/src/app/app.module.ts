@@ -10,19 +10,23 @@ import { NoteComponent } from './shared/components/note/note.component';
 import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { FooterComponent } from './footer/footer.component';
+import { TopFooterComponent } from './footer/top-footer/top-footer.component';
+import { MidFooterComponent } from './footer/mid-footer/mid-footer.component';
+import { BotFooterComponent } from './footer/bot-footer/bot-footer.component';
 
 @NgModule({
+  imports: [
+    SharedModule,
+    BrowserModule,
+    AppRoutingModule,
+  ],
   declarations: [
     AppComponent,
     MainLayoutComponent,
     HomePageComponent,
     NotePageComponent,
-    NoteComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    SharedModule
+    NoteComponent,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
