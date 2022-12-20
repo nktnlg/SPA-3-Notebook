@@ -12,8 +12,17 @@ import { NotesService } from 'src/app/shared/notes.service';
 export class DashboardPageComponent implements OnInit, OnDestroy{
   notes: Note[] = [];
   notesSub: Subscription|undefined;
+  searchNotes = '';
+  deleteSub: Subscription|undefined;
 
   constructor(private notesService: NotesService){}
+
+  remove(id: string | undefined){
+    if (!id)return;
+    this.deleteSub = this.notesService.deleteNote(id).subscribe(()=>{
+      this.notes = this.notes.filter(note => note.id !== id)
+    })
+  }
 
   ngOnInit(): void {
     this.notesSub = this.notesService.getNotes().subscribe(notes => {
@@ -22,6 +31,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy{
   }
   ngOnDestroy(): void {
     if(this.notesSub) this.notesSub.unsubscribe;
+    if(this.deleteSub) this.deleteSub.unsubscribe;
   }
 
 }

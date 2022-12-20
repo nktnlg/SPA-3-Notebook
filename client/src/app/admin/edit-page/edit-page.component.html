@@ -1,1 +1,22 @@
-<p>edit-page works!</p>
+<div *ngIf="form; else loading">
+    <form class="card note-form" [formGroup]="form" (ngSubmit)="submit()">
+        <h1>Edit note</h1>
+        <div id="form-title" class="form-control" [ngClass]="{invalid: form.get('title')?.touched && form.get('title')?.invalid}">
+            <input id="form-title-input" name="form-title-input" formControlName="title" class="form-input" type="text" placeholder="Title">
+            <label class="form-label" for="form-title-input">Title</label>
+            <div *ngIf="form.get('title')?.touched" class="form-validation">
+                <small *ngIf="form.get('title')?.errors?.['required']">Cannot be empty</small>
+            </div>
+        </div>
+    
+        <div class="form-control">
+            <label>Note</label>
+            <quill-editor formControlName="text" ></quill-editor>
+        </div>
+    
+        <button class="btn" type="submit" [disabled]="form.invalid || load">Submit</button>
+    </form>
+</div>
+<ng-template #loading>
+    <div class="load"></div>
+</ng-template>

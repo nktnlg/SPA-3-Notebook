@@ -36,4 +36,19 @@ export class NotesService {
         )
     }
 
+    getNoteById(id: string): Observable<Note>{
+        return this.http.get<Note>(`${environment.fbDBUrl}/notes/${id}.json`).pipe(
+            map((res: Note)=>{
+                return {...res, id, date: new Date(res.date)}
+            })
+        )
+    };
+
+    updateNote(note: Note): Observable<Note>{
+        return this.http.patch<Note>(`${environment.fbDBUrl}/notes/${note.id}.json`, note)
+    };
+
+    deleteNote(id: string):Observable<void>{
+        return this.http.delete<void>(`${environment.fbDBUrl}/notes/${id}.json`)
+    }
 }
