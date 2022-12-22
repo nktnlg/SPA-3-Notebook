@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Note } from '../shared/interfaces';
+import { NotesService } from '../shared/notes.service';
 
 @Component({
   selector: 'app-home-page',
@@ -6,6 +9,12 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit{
+  notes$: Observable<Note[]> | null = null;
 
+  constructor(private notesService: NotesService){}
+
+  ngOnInit(){
+    this.notes$ = this.notesService.getNotes()
+  }
 }

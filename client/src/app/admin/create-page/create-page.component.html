@@ -10,7 +10,7 @@
 
     <div class="form-control">
         <label>Note</label>
-        <quill-editor formControlName="text" ></quill-editor>
+        <quill-editor formControlName="text" class="quill"></quill-editor>
     </div>
 
     <div id="form-author" class="form-control" [ngClass]="{invalid: form.get('author')?.touched && form.get('author')?.invalid}">

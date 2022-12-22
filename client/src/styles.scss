@@ -105,6 +105,10 @@ body {
     transition-timing-function: ease-in-out;
 }
 
+.quill{
+    word-break: break-all;
+}
+
 // LOGIN
 .card-form {
     font-family: sans-serif;
@@ -195,6 +199,7 @@ body {
 .note-header {
     display: flex;
 }
+
 
 //TABLE
 .table {

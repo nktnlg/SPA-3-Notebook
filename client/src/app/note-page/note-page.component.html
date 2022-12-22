@@ -1,22 +1,21 @@
-<p>note-page works!</p>
-
-<div class="card">
+<div class="card"  *ngIf="note; else loading">
     <div class="note-header">
-        <h2>Note title</h2>
+        <h2>{{note.title}}</h2>
     </div>
 
     <div>
-        <strong>Alex</strong>
-        <small> 11.11.1999</small>
+        <strong>{{note.author}}</strong>
+        <small> {{note.date | date}}</small>
     </div>
 
     <div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni sed quidem at tempore pariatur, rem distinctio? Earum unde maiores officiis!</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni sed quidem at tempore pariatur, rem distinctio? Earum unde maiores officiis!</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni sed quidem at tempore pariatur, rem distinctio? Earum unde maiores officiis!</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni sed quidem at tempore pariatur, rem distinctio? Earum unde maiores officiis!</p>
+        <quill-view-html [content]="note.text"></quill-view-html>
+      
     </div>
 
     <button class="btn" routerLink="/">Return</button>
 
 </div>
+<ng-template #loading>
+    <div class="load"></div>
+</ng-template>

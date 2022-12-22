@@ -4,6 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
 import { Note } from 'src/app/shared/interfaces';
 import { NotesService } from 'src/app/shared/notes.service';
+import { AlertService } from '../shared/services/alert.service';
 
 @Component({
   selector: 'app-edit-page',
@@ -16,11 +17,12 @@ export class EditPageComponent implements OnInit, OnDestroy{
   form!: FormGroup;
   note!: Note;
   load = false;
-  updateSub!: Subscription;
+  updateSub: Subscription| null = null;
 
   constructor(
     private route: ActivatedRoute, 
-    private notesService: NotesService){}
+    private notesService: NotesService,
+    private alertService: AlertService){}
 
   submit(){
     if(this.form.invalid)return;
@@ -30,7 +32,7 @@ export class EditPageComponent implements OnInit, OnDestroy{
       ...this.note,
       text: this.form.value.text,
       title: this.form.value.title
-    }).subscribe(()=>{this.load = false})
+    }).subscribe(()=>{this.load = false; this.alertService.success('Note edited')})
   };
 
   ngOnInit(): void {

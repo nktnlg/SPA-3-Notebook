@@ -1,18 +1,18 @@
 <div class="card">
     <div class="note-header">
-        <h2>Note title</h2>
-        
+        <h2>{{note.title}}</h2>
     </div>
 
     <div>
-        <strong>Alex</strong>
-        <small> 11.11.1999</small>
+        <strong>{{note.author}}</strong>
+        <small> {{note.date | date}}</small>
     </div>
 
     <div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni sed quidem at tempore pariatur, rem distinctio? Earum unde maiores officiis!</p>      
+        <quill-view-html [content]="note.text"></quill-view-html>
     </div>
 
-    <button class="btn" [routerLink]="['/note', 123]">Open</button>
+    <button class="btn" [routerLink]="['/note', note.id]">Open</button>
 
 </div>
+

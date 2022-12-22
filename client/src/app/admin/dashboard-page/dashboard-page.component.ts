@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Note } from 'src/app/shared/interfaces';
 import { NotesService } from 'src/app/shared/notes.service';
+import { AlertService } from '../shared/services/alert.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -15,12 +16,15 @@ export class DashboardPageComponent implements OnInit, OnDestroy{
   searchNotes = '';
   deleteSub: Subscription|undefined;
 
-  constructor(private notesService: NotesService){}
+  constructor(
+    private notesService: NotesService,
+    private alertService: AlertService){}
 
   remove(id: string | undefined){
     if (!id)return;
     this.deleteSub = this.notesService.deleteNote(id).subscribe(()=>{
       this.notes = this.notes.filter(note => note.id !== id)
+      this.alertService.danger('Note deleted')
     })
   }
 

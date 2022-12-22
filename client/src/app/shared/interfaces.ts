@@ -3,6 +3,14 @@ export interface User {
     password: string,
     returnSecureToken?: boolean
 }
+
+export type AlertType = 'success' | 'warn' | 'danger'
+
+export interface Alert {
+    type: AlertType,
+    text: string
+}
+
 export interface Note {
     id?: string,
     title: string,
