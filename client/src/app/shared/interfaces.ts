@@ -3,6 +3,14 @@ export interface User {
     password: string,
     returnSecureToken?: boolean
 }
+
+export type AlertType = 'success' | 'warn' | 'danger'
+
+export interface Alert {
+    type: AlertType,
+    text: string
+}
+
 export interface Note {
     id?: string,
     title: string,
@@ -14,4 +22,11 @@ export interface Note {
 export interface FbAuthResponse {
     idToken: string,
     expiresIn: string
+}
+
+export interface FbCreateResponse {
+    name: string
+}
+export interface FbGetNotesResponse {
+    [key: string]: Note
 }

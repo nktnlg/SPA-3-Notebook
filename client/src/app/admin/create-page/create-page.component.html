@@ -1,4 +1,3 @@
-<p>create-page works!</p>
 <form class="card note-form" [formGroup]="form" (ngSubmit)="submit()">
     <h1>Create new note</h1>
     <div id="form-title" class="form-control" [ngClass]="{invalid: form.get('title')?.touched && form.get('title')?.invalid}">
@@ -11,6 +10,7 @@
 
     <div class="form-control">
         <label>Note</label>
+        <quill-editor formControlName="text" class="quill"></quill-editor>
     </div>
 
     <div id="form-author" class="form-control" [ngClass]="{invalid: form.get('author')?.touched && form.get('author')?.invalid}">

@@ -1,4 +1,9 @@
-<p>home-page works!</p>
-<app-note></app-note>
-<app-note></app-note>
-<app-note></app-note>
+<div *ngIf="notes$ | async as notes; else loading">
+    <app-note
+    *ngFor="let note of notes" 
+    [note]="note"
+    ></app-note>
+</div>
+<ng-template #loading>
+    <div class="load"></div>
+</ng-template>

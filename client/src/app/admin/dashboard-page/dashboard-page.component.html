@@ -1,1 +1,32 @@
-<p>dashboard-page works!</p>
+<div *ngIf="notes.length; else loading">
+    <div style="position: relative; margin: 1rem;">
+        <input id="find-note" class="form-input" style="background: #f3f3f3;" placeholder="Find a note" [(ngModel)]="searchNotes">
+        <label class="form-label" for="find-note-input">Find a note</label>
+    </div>
+    <table class="table">
+        <thead>
+            <tr class="table-head">
+                <th class="table-head-cell">#</th>
+                <th class="table-head-cell">Author</th>
+                <th class="table-head-cell">Title</th>
+                <th class="table-head-cell">Date</th>
+                <th class="table-head-cell">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="table-body">
+            <tr *ngFor="let note of notes | searchPipe: searchNotes; let idx = index">
+                <td class="table-body-cell">{{idx+1}}</td>
+                <td class="table-body-cell">{{note.author}}</td>
+                <td class="table-body-cell">{{note.title}}</td>
+                <td class="table-body-cell">{{note.date | date: 'medium'}}</td>
+                <td class="table-body-cell">
+                    <button [routerLink]="['/admin', 'note',  note.id, 'edit']" class="btn">Edit</button>
+                    <button class="btn" (click)="remove(note.id)">Remove</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<ng-template #loading>
+    <div class="load"></div>
+</ng-template>
