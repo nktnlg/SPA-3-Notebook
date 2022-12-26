@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Note } from 'src/app/shared/interfaces';
 import { NotesService } from 'src/app/shared/notes.service';
-import { AlertService } from '../shared/services/alert.service';
+import { AlertService } from '../../admin-shared/services/alert.service';
 
 @Component({
   selector: 'app-create-page',

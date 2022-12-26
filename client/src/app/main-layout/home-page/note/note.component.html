@@ -12,7 +12,7 @@
         <quill-view-html [content]="note.text"></quill-view-html>
     </div>
 
-    <button class="btn" [routerLink]="['/note', note.id]">Open</button>
+    <button class="btn" (click)="goToNote(note.id)">Open</button>
 
 </div>
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Note } from '../shared/interfaces';
-import { NotesService } from '../shared/notes.service';
+import { Note } from '../../shared/interfaces';
+import { NotesService } from '../../shared/notes.service';
 
 @Component({
   selector: 'app-home-page',

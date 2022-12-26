@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Note } from '../../interfaces';
+import { Router } from '@angular/router';
+import { Note } from '../../../shared/interfaces';
 
 @Component({
   selector: 'app-note',
@@ -11,7 +12,15 @@ export class NoteComponent {
   @Input()
   note!: Note;
 
-  constructor(){}
+  constructor( private router: Router){}
+
+  goToNote(id: string | undefined){
+    if (id) {this.router.navigate(['/note', id]);}
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' });
+  };
 
   ngOnInit(): void {
     let lines = this.note.text.split('</p>')

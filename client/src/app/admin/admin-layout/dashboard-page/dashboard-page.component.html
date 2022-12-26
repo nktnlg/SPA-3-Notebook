@@ -20,7 +20,7 @@
                 <td class="table-body-cell">{{note.title}}</td>
                 <td class="table-body-cell">{{note.date | date: 'medium'}}</td>
                 <td class="table-body-cell">
-                    <button [routerLink]="['/admin', 'note',  note.id, 'edit']" class="btn">Edit</button>
+                    <button (click)="goToNoteEdit(note.id)"  class="btn">Edit</button>
                     <button class="btn" (click)="remove(note.id)">Remove</button>
                 </td>
             </tr>

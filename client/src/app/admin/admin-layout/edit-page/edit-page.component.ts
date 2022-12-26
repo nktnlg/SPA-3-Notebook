@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, switchMap } from 'rxjs';
 import { Note } from 'src/app/shared/interfaces';
 import { NotesService } from 'src/app/shared/notes.service';
-import { AlertService } from '../shared/services/alert.service';
+import { AlertService } from '../../admin-shared/services/alert.service';
 
 @Component({
   selector: 'app-edit-page',

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { Note } from '../shared/interfaces';
-import { NotesService } from '../shared/notes.service';
+import { Note } from '../../shared/interfaces';
+import { NotesService } from '../../shared/notes.service';
 
 @Component({
   selector: 'app-note-page',
@@ -15,7 +15,16 @@ export class NotePageComponent implements OnInit{
 
   constructor(
     private route: ActivatedRoute, 
-    private notesService: NotesService){}
+    private notesService: NotesService,
+    private router: Router){}
+
+  goToMain(){
+    this.router.navigate(['/']);
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth'})
+  }
 
   ngOnInit(): void {
     this.route.params.pipe(

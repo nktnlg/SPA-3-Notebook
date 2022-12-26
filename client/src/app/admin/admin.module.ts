@@ -1,17 +1,17 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
-import { AdminLayoutComponent } from './shared/components/admin-layout/admin-layout.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
-import { CreatePageComponent } from './create-page/create-page.component';
-import { EditPageComponent } from './edit-page/edit-page.component';
+import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
+import { LoginPageComponent } from './admin-layout/login-page/login-page.component';
+import { DashboardPageComponent } from './admin-layout/dashboard-page/dashboard-page.component';
+import { CreatePageComponent } from './admin-layout/create-page/create-page.component';
+import { EditPageComponent } from './admin-layout/edit-page/edit-page.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/shared.module";
-import { AuthGuard } from "./shared/services/auth.guard";
-import { SearchPipe } from "./shared/search.pipe";
-import { AlertComponent } from './shared/components/alert/alert.component';
-import { AlertService } from "./shared/services/alert.service";
+import { AuthGuard } from "./admin-shared/services/auth.guard";
+import { SearchPipe } from "./admin-shared/search.pipe";
+import { AlertComponent } from './admin-layout/alert/alert.component';
+import { AlertService } from "./admin-shared/services/alert.service";
 
 @NgModule({
     imports: [
