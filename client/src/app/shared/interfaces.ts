@@ -11,12 +11,21 @@ export interface Alert {
     text: string
 }
 
+export interface Folder {
+    id?: string,
+    title: string,
+    author: string,
+    date: Date,
+    folder: string
+}
+
 export interface Note {
     id?: string,
     title: string,
     text: string,
     author: string,
-    date: Date
+    date: Date,
+    folder: string
 }
 
 export interface FbAuthResponse {
@@ -29,4 +38,7 @@ export interface FbCreateResponse {
 }
 export interface FbGetNotesResponse {
     [key: string]: Note
+}
+export interface FbGetFoldersResponse {
+    [key: string]: Folder
 }

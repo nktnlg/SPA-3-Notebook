@@ -25,9 +25,21 @@ export class NotesService {
     getNotes(): Observable<Note[]>{
         return this.http.get<FbGetNotesResponse>(`${environment.fbDBUrl}/notes.json`)
         .pipe(
-            //вчитайся
             map((res: FbGetNotesResponse)=>{
                 return Object.keys(res).map(key=>({
+                    ...res[key],
+                    id: key,
+                    date: new Date(res[key].date)
+                }))
+            })
+        )
+    }
+
+    getNotesByFolderId(folderId: string): Observable<Note[]>{
+        return this.http.get<FbGetNotesResponse>(`${environment.fbDBUrl}/notes.json`)
+        .pipe(
+            map((res: FbGetNotesResponse)=>{
+                return Object.keys(res).filter(key=> res[key].folder === folderId).map(key=> ({
                     ...res[key],
                     id: key,
                     date: new Date(res[key].date)

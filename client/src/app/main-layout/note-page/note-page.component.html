@@ -1,0 +1,21 @@
+<div class="card"  *ngIf="note; else loading">
+    <div class="note-header">
+        <h2>{{note.title}}</h2>
+    </div>
+
+    <div>
+        <strong>{{note.author}}</strong>
+        <small> {{note.date | date}}</small>
+    </div>
+
+    <div>
+        <quill-view-html [content]="note.text"></quill-view-html>
+      
+    </div>
+
+    <button class="btn" (click)="goToMain()">Return</button>
+
+</div>
+<ng-template #loading>
+    <div class="load"></div>
+</ng-template>

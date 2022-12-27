@@ -15,6 +15,11 @@ body {
     margin: 0;
 }
 
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+
 .header {
     font-family: sans-serif;
 
@@ -29,7 +34,6 @@ body {
 }
 .header-admin{
     justify-content: space-between;
-
     align-items: stretch;
 }
 
@@ -87,6 +91,14 @@ body {
     min-height: 20rem;
 }
 
+.top-btn-div{
+    display: flex;
+    
+}
+.top-btn{
+    flex-grow: 1;
+}
+
 .card {
     padding: 16px;
     background-color: $contrast-element-color;
@@ -120,7 +132,7 @@ body {
 .note-form {
     font-family: sans-serif;
     max-width: 40rem;
-    margin: 0 auto;
+    margin: 1rem auto;
 }
 
 .form-control{
