@@ -1,9 +1,25 @@
-<div *ngIf="notes$ | async as notes; else loading">
-    <app-note
-    *ngFor="let note of notes" 
-    [note]="note"
-    ></app-note>
+
+<button *ngIf="folderId !== 'none'" class="btn mb-1" (click)="goToUpperFolder(folderId)">back</button>
+<div *ngIf="folders$| async as folders; else loading">
+    <div *ngIf="notes$ | async as notes; else loading">
+        
+        <app-folder
+        *ngFor="let folder of folders" 
+        [folder]="folder"
+        ></app-folder>
+
+
+        <app-note
+        *ngFor="let note of notes" 
+        [note]="note"
+        ></app-note>
+
+    </div>
 </div>
+
+
+
+
 
 
 <ng-template #loading>

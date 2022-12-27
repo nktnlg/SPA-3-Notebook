@@ -31,7 +31,8 @@ export class EditPageComponent implements OnInit, OnDestroy{
     this.updateSub = this.notesService.updateNote({
       ...this.note,
       text: this.form.value.text,
-      title: this.form.value.title
+      title: this.form.value.title,
+      folder: 'none'
     }).subscribe(()=>{this.load = false; this.alertService.success('Note edited')})
   };
 

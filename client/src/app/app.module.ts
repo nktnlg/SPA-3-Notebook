@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { FolderComponent } from './main-layout/home-page/folder/folder.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     HomePageComponent,
     NotePageComponent,
     NoteComponent,
+    FolderComponent,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

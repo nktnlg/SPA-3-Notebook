@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: '', component: MainLayoutComponent, children: [
     {path: '', redirectTo: '/', pathMatch: 'full'},
     {path: '', component: HomePageComponent},
+    {path: ':folder', component: HomePageComponent},
     {path: 'note/:id', component: NotePageComponent}
   ]},
   {

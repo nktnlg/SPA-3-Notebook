@@ -1,3 +1,25 @@
+<form class="card note-form" [formGroup]="formFolder" (ngSubmit)="submitFolder()">
+    <h1>Create new folder</h1>
+    <div id="form-folder-title" class="form-control" [ngClass]="{invalid: formFolder.get('titleFolder')?.touched && formFolder.get('titleFolder')?.invalid}">
+        <input id="form-folder-title-input" name="form-folder-title-input" formControlName="titleFolder" class="form-input" type="text" placeholder="Folder name">
+        <label class="form-label" for="form-folder-title-input">Folder name</label>
+        <div *ngIf="formFolder.get('titleFolder')?.touched" class="form-validation">
+            <small *ngIf="formFolder.get('titleFolder')?.errors?.['required']">Cannot be empty</small>
+        </div>
+    </div>
+
+
+    <div id="form-folder-author" class="form-control" [ngClass]="{invalid: formFolder.get('authorFolder')?.touched && form.get('authorFolder')?.invalid}">
+        <input id="form-folder-author-input" name="form-folder-author-input" formControlName="authorFolder" class="form-input" type="text" placeholder="author">
+        <label class="form-label" for="form-folder-author-input">Author</label>
+        <div *ngIf="form.get('authorFolder')?.touched" class="form-validation">
+            <small *ngIf="form.get('authorFolder')?.errors?.['required']">Cannot be empty</small>
+        </div>
+    </div>
+
+    <button class="btn" type="submit" [disabled]="formFolder.invalid">Create folder</button>
+</form>
+
 <form class="card note-form" [formGroup]="form" (ngSubmit)="submit()">
     <h1>Create new note</h1>
     <div id="form-title" class="form-control" [ngClass]="{invalid: form.get('title')?.touched && form.get('title')?.invalid}">
