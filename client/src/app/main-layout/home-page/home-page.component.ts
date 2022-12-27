@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, Subscription, } from 'rxjs';
+import { AuthService } from 'src/app/admin/admin-shared/services/auth.service';
 import { FoldersService } from 'src/app/shared/folders.service';
 import { Folder, Note } from '../../shared/interfaces';
 import { NotesService } from '../../shared/notes.service';
@@ -12,6 +13,7 @@ import { NotesService } from '../../shared/notes.service';
   ]
 })
 export class HomePageComponent implements OnInit, OnDestroy {
+  logged = false
   folderId = 'none';
   parentFolder = 'none';
   notes$: Observable<Note[]> | null = null;
@@ -22,7 +24,8 @@ export class HomePageComponent implements OnInit, OnDestroy {
     private notesService: NotesService,
     private route: ActivatedRoute,
     private foldersService: FoldersService,
-    private router: Router){}
+    private router: Router,
+    private auth: AuthService){}
 
 
   goToUpperFolder(folderId: string | undefined){
@@ -32,11 +35,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(){
+    if (this.auth.token) this.logged = true;
     this.route.params.subscribe((params: Params)=>{
       if(params['folder'])this.folderId = params['folder']
       this.notes$ = this.notesService.getNotesByFolderId(this.folderId);
       this.folders$ = this.foldersService.getFoldersByFolderId(this.folderId);
-      this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => this.parentFolder = folder.folder)
+
+      if(this.parentFolder !== 'none')this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => this.parentFolder = folder.folder)
     });
   }
 

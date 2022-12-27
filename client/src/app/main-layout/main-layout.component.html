@@ -1,6 +1,7 @@
 <div class="header">
     <h1 class="header-title">Notebook</h1>
-    <button (click)="goToAdmin()" class="btn">admin</button>
+    <button *ngIf="!logged" (click)="goToAdmin()" class="btn">Log in</button>
+    <button *ngIf="logged"  (click)="goToAdmin()" class="btn">Logged: Admin</button>
 </div>
 <div class="content">
     <router-outlet></router-outlet>

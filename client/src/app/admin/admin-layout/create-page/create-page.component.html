@@ -38,6 +38,7 @@
     <div id="form-author" class="form-control" [ngClass]="{invalid: form.get('author')?.touched && form.get('author')?.invalid}">
         <input id="form-author-input" name="form-author-input" formControlName="author" class="form-input" type="text" placeholder="author">
         <label class="form-label" for="form-author-input">Author</label>
+        
         <div *ngIf="form.get('author')?.touched" class="form-validation">
             <small *ngIf="form.get('author')?.errors?.['required']">Cannot be empty</small>
         </div>

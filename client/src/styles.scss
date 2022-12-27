@@ -10,8 +10,6 @@ $hover-base-color: #eee;
 $alert-color: red;
 
 
-
-
 body {
     font-family: sans-serif;
     margin: 0;
@@ -36,7 +34,6 @@ body {
 }
 .header-admin{
     justify-content: space-between;
-
     align-items: stretch;
 }
 
@@ -92,6 +89,14 @@ body {
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
     min-height: 20rem;
+}
+
+.top-btn-div{
+    display: flex;
+    
+}
+.top-btn{
+    flex-grow: 1;
 }
 
 .card {
