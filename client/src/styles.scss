@@ -15,10 +15,6 @@ body {
     margin: 0;
 }
 
-.mb-1 {
-    margin-bottom: 1rem;
-}
-
 
 .header {
     font-family: sans-serif;
@@ -93,6 +89,7 @@ body {
 
 .top-btn-div{
     display: flex;
+    gap: 1rem;
     
 }
 .top-btn{
@@ -134,6 +131,10 @@ body {
     max-width: 40rem;
     margin: 1rem auto;
 }
+.note-form-btns{
+    max-width: 42rem;
+    margin: 0 auto;
+}
 
 .form-control{
     position: relative;
@@ -150,6 +151,19 @@ body {
     line-height: 1.5rem; /* 24px */ 
     
 }
+.form-input-author-flex{
+    display: flex;
+    gap: 1rem;
+}
+.form-input-author{
+    width: auto;
+    flex-grow: 1;
+}
+.form-input-author-btn{
+    flex-grow: 1;
+}
+
+
 .form-input:focus {
     border-bottom: 2px solid #aaa;
 
@@ -198,7 +212,7 @@ body {
 .form-validation {
     position: absolute;
     padding-top: 0.125rem;
-    color: r$alert-color;
+    color: $alert-color;
 }
 
 .invalid {
@@ -270,7 +284,6 @@ body {
 
 //buttons
 .btn {
-    margin-right: 1rem;
     text-transform: uppercase;
     font-weight: 600;
     padding-top: 10px;
@@ -333,5 +346,15 @@ body {
 @keyframes rotate {
     0% {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
+}
+
+
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+.mr-1{
+    margin-right: 1rem;
 }
 

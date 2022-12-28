@@ -23,7 +23,8 @@ export class AuthService {
     }
 
     login(user: User): Observable<FbAuthResponse>{
-        user.returnSecureToken = true
+        user.returnSecureToken = true;
+        localStorage.setItem('username', user.email);
        return this.http.post<any>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
        .pipe(
         tap(res => this.setToken(res)),
@@ -51,6 +52,7 @@ export class AuthService {
 
     logout(){
         this.setToken(null)
+        localStorage.removeItem('username')
 
     }
 
@@ -60,7 +62,6 @@ export class AuthService {
         if (res) {
         const expDate = new Date(new Date().getTime() + +res.expiresIn * 1000 )
         localStorage.setItem('fb-token', res.idToken)
-        //a zachem?
         localStorage.setItem('fb-token-exp', expDate.toString())}
         else {localStorage.clear()}
     }

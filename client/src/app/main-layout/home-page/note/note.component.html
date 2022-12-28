@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" (click)="goToNote(note.id)">
     <div class="note-header">
         <h2>{{note.title}}</h2>
     </div>
@@ -11,8 +11,6 @@
     <div>
         <quill-view-html [content]="note.text"></quill-view-html>
     </div>
-
-    <button class="btn" (click)="goToNote(note.id)">Open</button>
 
 </div>
 

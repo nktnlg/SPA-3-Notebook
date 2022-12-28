@@ -1,48 +1,84 @@
-<form class="card note-form" [formGroup]="formFolder" (ngSubmit)="submitFolder()">
+<div class="mb-1 top-btn-div note-form-btns">
+    <button class="btn top-btn" (click)="goToDashboard()">Back to dashboard</button>
+</div>
+<div class="mb-1 top-btn-div note-form-btns">
+    <button [disabled]="newFolder" class="btn top-btn" (click)="switchToNewFolder()">Create Folder</button>
+    <button [disabled]="newNote" class="btn top-btn" (click)="switchToNewNote()">Create Note</button>
+</div>
+
+<form id="new-folder-form" *ngIf="newFolder" class="card note-form" [formGroup]="folderForm" (ngSubmit)="submitFolder()">
     <h1>Create new folder</h1>
-    <div id="form-folder-title" class="form-control" [ngClass]="{invalid: formFolder.get('titleFolder')?.touched && formFolder.get('titleFolder')?.invalid}">
-        <input id="form-folder-title-input" name="form-folder-title-input" formControlName="titleFolder" class="form-input" type="text" placeholder="Folder name">
+    <div id="form-folder-title" class="form-control" [ngClass]="{invalid: folderForm.get('folderTitle')?.touched && folderForm.get('folderTitle')?.invalid}">
+        <input id="form-folder-title-input" name="form-folder-title-input" formControlName="folderTitle" class="form-input" type="text" placeholder="Folder name">
         <label class="form-label" for="form-folder-title-input">Folder name</label>
-        <div *ngIf="formFolder.get('titleFolder')?.touched" class="form-validation">
-            <small *ngIf="formFolder.get('titleFolder')?.errors?.['required']">Cannot be empty</small>
+        <div *ngIf="folderForm.get('folderTitle')?.touched" class="form-validation">
+            <small *ngIf="folderForm.get('folderTitle')?.errors?.['required']">Cannot be empty</small>
         </div>
     </div>
 
 
-    <div id="form-folder-author" class="form-control" [ngClass]="{invalid: formFolder.get('authorFolder')?.touched && form.get('authorFolder')?.invalid}">
-        <input id="form-folder-author-input" name="form-folder-author-input" formControlName="authorFolder" class="form-input" type="text" placeholder="author">
-        <label class="form-label" for="form-folder-author-input">Author</label>
-        <div *ngIf="form.get('authorFolder')?.touched" class="form-validation">
-            <small *ngIf="form.get('authorFolder')?.errors?.['required']">Cannot be empty</small>
+    <div id="form-folder-author" class="form-control" [ngClass]="{invalid: folderForm.get('folderAuthor')?.touched && folderForm.get('folderAuthor')?.errors?.['required']}">
+        <div class="form-input-author-flex">
+            <input id="form-folder-author-input" name="form-folder-author-input" formControlName="folderAuthor" class="form-input form-input-author" type="text" placeholder="author">
+            <label class="form-label" for="form-folder-author-input">Author</label>
+            <button class="btn form-input-author-btn" type="button" (click)="setUsernameFolderAuthor()">Use Username</button>
+        </div>
+        <div *ngIf="folderForm.get('folderAuthor')?.touched" class="form-validation">
+            <small *ngIf="folderForm.get('folderAuthor')?.errors?.['required']">Cannot be empty</small>
         </div>
     </div>
 
-    <button class="btn" type="submit" [disabled]="formFolder.invalid">Create folder</button>
+    <div id="form-folder-parent" class="form-control" [ngClass]="{invalid: folderForm.get('folderParent')?.touched && folderForm.get('folderParent')?.invalid}">
+        <div class="form-input-author-flex">
+            <input id="form-folder-parent-input" name="form-folder-parent-input" formControlName="folderParent" class="form-input form-input-author" type="text" placeholder="parent" readonly>
+            <label class="form-label" for="form-folder-parent-input">Parent Folder</label>
+            <button class="btn form-input-author-btn" type="button" (click)="setParentToNone()" [disabled]="parentFolder === 'none'">Set Default</button>
+        </div>
+        <div *ngIf="folderForm.get('folderParent')?.touched" class="form-validation">
+            <small *ngIf="folderForm.get('folderParent')?.errors?.['required']">Cannot be empty</small>
+        </div>
+    </div>
+
+
+    <button class="btn" type="submit" [disabled]="folderForm.invalid">Create folder</button>
 </form>
 
-<form class="card note-form" [formGroup]="form" (ngSubmit)="submit()">
+<form id="new-note-form" *ngIf="newNote" class="card note-form" [formGroup]="noteForm" (ngSubmit)="submitNote()">
     <h1>Create new note</h1>
-    <div id="form-title" class="form-control" [ngClass]="{invalid: form.get('title')?.touched && form.get('title')?.invalid}">
-        <input id="form-title-input" name="form-title-input" formControlName="title" class="form-input" type="text" placeholder="Title">
-        <label class="form-label" for="form-title-input">Title</label>
-        <div *ngIf="form.get('title')?.touched" class="form-validation">
-            <small *ngIf="form.get('title')?.errors?.['required']">Cannot be empty</small>
+    <div id="form-note-title" class="form-control" [ngClass]="{invalid: noteForm.get('noteTitle')?.touched && noteForm.get('noteTitle')?.invalid}">
+        <input id="form-note-title-input" name="form-note-title-input" formControlName="noteTitle" class="form-input" type="text" placeholder="Title">
+        <label class="form-label" for="form-note-title-input">Title</label>
+        <div *ngIf="noteForm.get('noteTitle')?.touched" class="form-validation">
+            <small *ngIf="noteForm.get('noteTitle')?.errors?.['required']">Cannot be empty</small>
         </div>
     </div>
 
     <div class="form-control">
         <label>Note</label>
-        <quill-editor formControlName="text" class="quill"></quill-editor>
+        <quill-editor formControlName="noteText" class="quill"></quill-editor>
     </div>
 
-    <div id="form-author" class="form-control" [ngClass]="{invalid: form.get('author')?.touched && form.get('author')?.invalid}">
-        <input id="form-author-input" name="form-author-input" formControlName="author" class="form-input" type="text" placeholder="author">
-        <label class="form-label" for="form-author-input">Author</label>
-        
-        <div *ngIf="form.get('author')?.touched" class="form-validation">
-            <small *ngIf="form.get('author')?.errors?.['required']">Cannot be empty</small>
+    <div id="form-note-author" class="form-control" [ngClass]="{invalid: noteForm.get('noteAuthor')?.touched && noteForm.get('noteAuthor')?.invalid}">
+        <div class="form-input-author-flex">
+            <input id="form-note-author-input" name="form-note-author-input" formControlName="noteAuthor" class="form-input form-input-author" type="text" placeholder="author">
+            <label class="form-label" for="form-note-author-input">Author</label>
+            <button class="btn form-input-author-btn" type="button"  (click)="setUsernameNoteAuthor()">Use Username</button>
+        </div>
+        <div *ngIf="noteForm.get('noteAuthor')?.touched" class="form-validation">
+            <small *ngIf="noteForm.get('noteAuthor')?.errors?.['required']">Cannot be empty</small>
         </div>
     </div>
 
-    <button class="btn" type="submit" [disabled]="form.invalid">Create note</button>
+    <div id="form-note-parent" class="form-control" [ngClass]="{invalid: noteForm.get('noteParent')?.touched && noteForm.get('noteParent')?.invalid}">
+        <div class="form-input-author-flex">
+            <input id="form-note-parent-input" name="form-note-parent-input" formControlName="noteParent" class="form-input form-input-author" type="text" placeholder="parent" readonly>
+            <label class="form-label" for="form-note-parent-input">Parent Folder</label>
+            <button class="btn form-input-author-btn" type="button" (click)="setParentToNone()" [disabled]="parentFolder === 'none'">Set Default</button>
+        </div>
+        <div *ngIf="noteForm.get('noteParent')?.touched" class="form-validation">
+            <small *ngIf="noteForm.get('noteParent')?.errors?.['required']">Cannot be empty</small>
+        </div>
+    </div>
+
+    <button class="btn" type="submit" [disabled]="noteForm.invalid">Create note</button>
 </form>
