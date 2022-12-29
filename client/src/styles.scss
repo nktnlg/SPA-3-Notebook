@@ -2,15 +2,15 @@
 @import '~quill/dist/quill.snow.css';
 
 //GRAY THEME
-// $text-color: #333;
-// $text-secondary-color: #666;
-// $text-ghost: #999;
-// $border-color-ghost: #aaa;
-// $border-color: #ccc;
-// $hover-base-color: #eee;
-// $base-element-color: #f3f3f3;
-// $contrast-element-color: white;
-// $alert-color: red;
+$text-color: #333;
+$text-secondary-color: #666;
+$text-ghost: #999;
+$border-color-ghost: #aaa;
+$border-color: #ccc;
+$hover-base-color: #eee;
+$base-element-color: #f3f3f3;
+$contrast-element-color: white;
+$alert-color: red;
 
 //ORANGE THEME
 // $text-color: #32334C;
@@ -24,15 +24,15 @@
 // $alert-color: red;
 
 //BLUE THEME
-$text-color: #32334C;
-$text-secondary-color: #32334C;
-$text-ghost: #3E3E60;
-$border-color-ghost: #F18EB7;
-$border-color: #F18EB7;
-$hover-base-color: #a5deff;
-$base-element-color: #d4efff;
-$contrast-element-color: #fdedfd;
-$alert-color: red;
+// $text-color: #32334C;
+// $text-secondary-color: #32334C;
+// $text-ghost: #3E3E60;
+// $border-color-ghost: #F18EB7;
+// $border-color: #F18EB7;
+// $hover-base-color: #a5deff;
+// $base-element-color: #d4efff;
+// $contrast-element-color: #fdedfd;
+// $alert-color: red;
 
 
 body {
@@ -111,6 +111,9 @@ body {
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
     min-height: 20rem;
+
+
+    overflow-x: scroll;
 }
 
 .top-btn-div{
