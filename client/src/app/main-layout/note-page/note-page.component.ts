@@ -22,7 +22,7 @@ export class NotePageComponent implements OnInit{
     private auth: AuthService){}
 
   goBack(){
-    if(this.note?.folder !== 'none') {this.router.navigate(['/', this.note?.folder])}
+    if(this.note?.parentFolderId !== 'none') {this.router.navigate(['/', this.note?.parentFolderId])}
     else {this.router.navigate(['/'])}
     window.scroll({ 
       top: 0, 

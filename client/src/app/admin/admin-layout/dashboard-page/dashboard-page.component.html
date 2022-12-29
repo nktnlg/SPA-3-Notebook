@@ -20,7 +20,7 @@
                 <td class="table-body-cell">{{idx+1}}</td>
                 <td class="table-body-cell">{{note.title}}</td>
                 <td class="table-body-cell">{{note.author}}</td>
-                <td class="table-body-cell">{{note.folder}}</td>
+                <td class="table-body-cell">{{note.parentFolderName}}</td>
                 <td class="table-body-cell">{{note.date | date: 'medium'}}</td>
                 <td class="table-body-cell">
                     <button (click)="goToNoteEdit(note.id)"  class="btn">Edit</button>

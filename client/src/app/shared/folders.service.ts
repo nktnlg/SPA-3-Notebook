@@ -46,7 +46,7 @@ export class FoldersService{
         return this.http.get<FbGetFoldersResponse>(`${environment.fbDBUrl}/folders.json`)
         .pipe(
             map((res: FbGetFoldersResponse)=>{
-                return Object.keys(res).filter(key=> res[key].folder === folderId).map(key=> ({
+                return Object.keys(res).filter(key=> res[key].parentFolderId === folderId).map(key=> ({
                     ...res[key],
                     id: key,
                     date: new Date(res[key].date)

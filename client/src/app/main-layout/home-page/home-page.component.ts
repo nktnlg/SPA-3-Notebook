@@ -15,14 +15,15 @@ import { NotesService } from '../../shared/notes.service';
 export class HomePageComponent implements OnInit, OnDestroy {
   logged = false;
 
-  folderMinimize = '+';
+  folderMinimize = '-';
   folderMinimizeSwitch(){if(this.folderMinimize === '-'){this.folderMinimize = '+'}else{this.folderMinimize = '-'}};
-  noteMinimize = '+';
+  noteMinimize = '-';
   noteMinimizeSwitch(){if(this.noteMinimize === '-'){this.noteMinimize = '+'}else{this.noteMinimize = '-'}};
 
   folderId = 'none';
-  folderName = 'Notes';
-  parentFolder = 'none';
+  folderName = 'none';
+  parentFolderId = 'none';
+  parentFolderName = 'none';
 
   notes$: Observable<Note[]> | null = null;
   folders$: Observable<Folder[]> | null = null;
@@ -36,7 +37,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
     private auth: AuthService){}
 
   goToCreateFolder(){
-    this.router.navigate(['/admin', 'create'], {queryParams:{parentFolder: this.folderId, typeOfNew: 'folder'}})
+    this.router.navigate(['/admin', 'create'], {queryParams:{parentFolderId: this.folderId, parentFolderName: this.folderName, typeOfNew: 'folder'}})
 
     window.scroll({ 
       top: 0, 
@@ -44,7 +45,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       behavior: 'smooth'})
   };
   goToCreateNote(){
-    this.router.navigate(['/admin', 'create'], {queryParams:{parentFolder: this.folderId, typeOfNew: 'note'}})
+    this.router.navigate(['/admin', 'create'], {queryParams:{parentFolderId: this.folderId, parentFolderName: this.folderName, typeOfNew: 'note'}})
     
     window.scroll({ 
       top: 0, 
@@ -54,7 +55,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
 
   goToUpperFolder(folderId: string | undefined){
-    if(this.parentFolder !== 'none') {this.router.navigate(['/', this.parentFolder])}
+    if(this.parentFolderId !== 'none') {this.router.navigate(['/', this.parentFolderId])}
     else {this.router.navigate(['/'])}
 
     window.scroll({ 
@@ -71,7 +72,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       this.notes$ = this.notesService.getNotesByFolderId(this.folderId);
       this.folders$ = this.foldersService.getFoldersByFolderId(this.folderId);
 
-      if(this.folderId !== 'none')this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => {this.parentFolder = folder.folder; this.folderName = folder.title})
+      if(this.folderId !== 'none')this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => {this.parentFolderId = folder.parentFolderId; this.parentFolderName = folder.parentFolderName; this.folderName = folder.title})
     });
   }
 

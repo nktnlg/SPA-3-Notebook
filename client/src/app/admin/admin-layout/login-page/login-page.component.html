@@ -17,6 +17,7 @@
     <div class="submit-element">
         <button class="btn mr-1" type="submit" [disabled]="form.invalid || load">submit</button>
         <button class="btn mr-1" type="button" (click)="goToMain()">return</button>
+        <div class="load load-mini" *ngIf="load"></div>
         <div class="error-description" *ngIf="auth.error$ | async as error" >
             {{error}}
         </div>

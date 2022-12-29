@@ -9,6 +9,7 @@ export class ModalComponent {
   @Output('closeModal') closeModal: EventEmitter<any> = new EventEmitter;
   @Output('deleteNote') deleteNote: EventEmitter<any> = new EventEmitter;
 
+  outsideClick(e: Event){e.stopPropagation()}
 
 
 }

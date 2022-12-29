@@ -11,6 +11,7 @@ import { AuthService } from '../../admin-shared/services/auth.service';
   ]
 })
 export class LoginPageComponent implements OnInit {
+  
   retry = false;
   load = false;
   queryMessage = '';

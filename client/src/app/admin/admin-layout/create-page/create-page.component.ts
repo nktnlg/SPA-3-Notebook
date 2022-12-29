@@ -14,11 +14,14 @@ import { AlertService } from '../../admin-shared/services/alert.service';
 })
 export class CreatePageComponent implements OnInit{
 
-  parentFolder = 'none';
+  parentFolderId = 'none';
+  parentFolderName = 'none';
+
   setParentToNone(){
-    this.parentFolder='none'
-    this.folderForm.controls['folderParent'].setValue(this.parentFolder)
-    this.noteForm.controls['noteParent'].setValue(this.parentFolder)
+    this.parentFolderId='none'
+    this.parentFolderName='none'
+    this.folderForm.controls['folderParent'].setValue(this.parentFolderName)
+    this.noteForm.controls['noteParent'].setValue(this.parentFolderName)
   }
 
   newFolder = true;
@@ -44,9 +47,9 @@ export class CreatePageComponent implements OnInit{
   ngOnInit(): void {
     //Params reading
     this.route.queryParams.subscribe((params: Params)=> {
-      if(params['parentFolder']){this.parentFolder = params['parentFolder']}
+      if(params['parentFolderId'] && params['parentFolderName']){this.parentFolderId = params['parentFolderId']; this.parentFolderName = params['parentFolderName']}
       if(params['typeOfNew']){params['typeOfNew'] === 'note' ? this.switchToNewNote() : this.switchToNewFolder()}
-
+      
     })
 
     //Folder form
@@ -64,8 +67,8 @@ export class CreatePageComponent implements OnInit{
       noteAuthor: new FormControl(null, [Validators.required])
     })
 
-    this.folderForm.controls['folderParent'].setValue(this.parentFolder)
-    this.noteForm.controls['noteParent'].setValue(this.parentFolder)
+    this.folderForm.controls['folderParent'].setValue(this.parentFolderName)
+    this.noteForm.controls['noteParent'].setValue(this.parentFolderName)
   }
 
   submitNote(){
@@ -75,7 +78,8 @@ export class CreatePageComponent implements OnInit{
       text: this.noteForm.value.noteText,
       author: this.noteForm.value.noteAuthor,
       date: new Date(),
-      folder: this.noteForm.value.noteParent
+      parentFolderId: this.parentFolderId,
+      parentFolderName: this.noteForm.value.noteParent,
     } 
 
     this.notesService.create(note).subscribe(()=>{
@@ -90,7 +94,8 @@ export class CreatePageComponent implements OnInit{
       title: this.folderForm.value.folderTitle,
       author: this.folderForm.value.folderAuthor,
       date: new Date(),
-      folder: this.folderForm.value.folderParent
+      parentFolderId: this.parentFolderId,
+      parentFolderName: this.folderForm.value.folderParent,
     }
 
     this.foldersService.create(folder).subscribe(()=>{
