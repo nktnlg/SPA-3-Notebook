@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { AuthService } from 'src/app/admin/admin-shared/services/auth.service';
 import { Note } from '../../shared/interfaces';
 import { NotesService } from '../../shared/notes.service';
 
@@ -11,15 +12,26 @@ import { NotesService } from '../../shared/notes.service';
   ]
 })
 export class NotePageComponent implements OnInit{
+  logged = false;
   note: Note | null = null;
 
   constructor(
     private route: ActivatedRoute, 
     private notesService: NotesService,
-    private router: Router){}
+    private router: Router,
+    private auth: AuthService){}
 
-  goToMain(){
-    this.router.navigate(['/']);
+  goBack(){
+    if(this.note?.folder !== 'none') {this.router.navigate(['/', this.note?.folder])}
+    else {this.router.navigate(['/'])}
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth'})
+  }
+
+  goToEdit(){
+    this.router.navigate(['/admin', 'note', this.note?.id, 'edit'])
     window.scroll({ 
       top: 0, 
       left: 0, 
@@ -27,6 +39,8 @@ export class NotePageComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    if (this.auth.token) this.logged = true;
+
     this.route.params.pipe(
       switchMap((params: Params)=>{
         return this.notesService.getNoteById(params['id'])

@@ -12,6 +12,8 @@ import { AlertService } from '../../admin-shared/services/alert.service';
   ]
 })
 export class DashboardPageComponent implements OnInit, OnDestroy{
+  modal: string | null = '';
+  switchModal(noteId: string| undefined){if(noteId){this.modal = noteId}else{this.modal = null}}
   notes: Note[] = [];
   notesSub: Subscription|undefined;
   searchNotes = '';
@@ -34,8 +36,9 @@ export class DashboardPageComponent implements OnInit, OnDestroy{
   remove(id: string | undefined){
     if (!id)return;
     this.deleteSub = this.notesService.deleteNote(id).subscribe(()=>{
-      this.notes = this.notes.filter(note => note.id !== id)
-      this.alertService.danger('Note deleted')
+      this.notes = this.notes.filter(note => note.id !== id);
+      this.modal = null;
+      this.alertService.danger('Note deleted');
     })
   }
 

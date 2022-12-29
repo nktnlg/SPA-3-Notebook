@@ -12,6 +12,7 @@ import { AuthGuard } from "./admin-shared/services/auth.guard";
 import { SearchPipe } from "./admin-shared/search.pipe";
 import { AlertComponent } from './admin-layout/alert/alert.component';
 import { AlertService } from "./admin-shared/services/alert.service";
+import { ModalComponent } from './admin-layout/modal/modal.component';
 
 @NgModule({
     imports: [
@@ -35,7 +36,8 @@ import { AlertService } from "./admin-shared/services/alert.service";
         CreatePageComponent,
         EditPageComponent,
         SearchPipe,
-        AlertComponent
+        AlertComponent,
+        ModalComponent
     ],
     exports: [RouterModule],
     providers: [AuthGuard, AlertService]

@@ -13,10 +13,17 @@ import { NotesService } from '../../shared/notes.service';
   ]
 })
 export class HomePageComponent implements OnInit, OnDestroy {
-  logged = false
+  logged = false;
+
+  folderMinimize = '+';
+  folderMinimizeSwitch(){if(this.folderMinimize === '-'){this.folderMinimize = '+'}else{this.folderMinimize = '-'}};
+  noteMinimize = '+';
+  noteMinimizeSwitch(){if(this.noteMinimize === '-'){this.noteMinimize = '+'}else{this.noteMinimize = '-'}};
+
   folderId = 'none';
   folderName = 'Notes';
   parentFolder = 'none';
+
   notes$: Observable<Note[]> | null = null;
   folders$: Observable<Folder[]> | null = null;
   parent$: Subscription | null = null;
@@ -64,7 +71,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       this.notes$ = this.notesService.getNotesByFolderId(this.folderId);
       this.folders$ = this.foldersService.getFoldersByFolderId(this.folderId);
 
-      this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => {this.parentFolder = folder.folder; this.folderName = folder.title})
+      if(this.folderId !== 'none')this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => {this.parentFolder = folder.folder; this.folderName = folder.title})
     });
   }
 
