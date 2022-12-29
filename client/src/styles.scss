@@ -1,18 +1,44 @@
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.snow.css';
 
+//GRAY THEME
+// $text-color: #333;
+// $text-secondary-color: #666;
+// $text-ghost: #999;
+// $border-color-ghost: #aaa;
+// $border-color: #ccc;
+// $hover-base-color: #eee;
+// $base-element-color: #f3f3f3;
+// $contrast-element-color: white;
+// $alert-color: red;
 
-$text-color: #333;
-$text-secondary-color: #666;
-$base-element-color: #f3f3f3;
-$contrast-element-color: white;
-$hover-base-color: #eee;
+//ORANGE THEME
+// $text-color: #32334C;
+// $text-secondary-color: #32334C;
+// $text-ghost: #3E3E60;
+// $border-color-ghost: #F18EB7;
+// $border-color: #F18EB7;
+// $hover-base-color: #E1926B;
+// $base-element-color: #DF6D35;
+// $contrast-element-color: #fdedfd;
+// $alert-color: red;
+
+//BLUE THEME
+$text-color: #32334C;
+$text-secondary-color: #32334C;
+$text-ghost: #3E3E60;
+$border-color-ghost: #F18EB7;
+$border-color: #F18EB7;
+$hover-base-color: #a5deff;
+$base-element-color: #d4efff;
+$contrast-element-color: #fdedfd;
 $alert-color: red;
 
 
 body {
     font-family: sans-serif;
     margin: 0;
+    background: $contrast-element-color;
 }
 
 
@@ -145,10 +171,14 @@ body {
     width: 100%;
     height: 2rem;
     border: 0px;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 2px solid $border-color;
+    background: transparent !important;
 
     font-size: 1rem; /* 16px */
     line-height: 1.5rem; /* 24px */ 
+    
+}
+.input-on-base{
     
 }
 .form-input-author-flex{
@@ -165,7 +195,7 @@ body {
 
 
 .form-input:focus {
-    border-bottom: 2px solid #aaa;
+    border-bottom: 2px solid $border-color-ghost;
 
     outline: 2px solid transparent;
     outline-offset: 2px;
@@ -190,7 +220,7 @@ body {
 
     font-size: 1rem; /* 16px */
     line-height: 1.5rem; /* 24px */   
-    color: #999; 
+    color: $text-ghost; 
 }
 .form-input:focus + .form-label {
     top: -1.25rem;
@@ -240,7 +270,7 @@ body {
 }
 //table head
 .table-head-cell{
-    background: #999;
+    background: $hover-base-color;
     
     text-align: start;
     color: $text-color;
@@ -276,7 +306,7 @@ body {
     width: 100%;
     height: 2rem;
     border: 0px;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 2px solid $border-color;
 
     font-size: 1rem; /* 16px */
     line-height: 1.5rem; /* 24px */ 
@@ -309,7 +339,7 @@ body {
 }
 .btn:disabled {
     background-color: $hover-base-color;
-    color: #999;
+    color: $text-ghost;
 }
 
 
@@ -317,17 +347,17 @@ body {
 .footer {
     font-family: sans-serif;
     margin-top: 1rem;
-    background-color: #f3f3f3;
-    color: #333;
+    background-color: $base-element-color;
+    color: $text-color;
 }
 .footer-bot {
     padding: 24px;
     text-align: center;
-    background-color: #eee;
+    background-color: $hover-base-color;
 }
 .link{
     text-decoration: none;
-    color: #303030;
+    color: $text-secondary-color;
 }
 .semibold{
     font-weight: 600;
