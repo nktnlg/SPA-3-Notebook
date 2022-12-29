@@ -1,3 +1,6 @@
+<div class="mb-1 top-btn-div">
+    <button class="btn top-btn" (click)="goToMain()">Return</button>
+</div>
 <div class="card"  *ngIf="note; else loading">
     <div class="note-header">
         <h2>{{note.title}}</h2>
@@ -12,8 +15,6 @@
         <quill-view-html [content]="note.text"></quill-view-html>
       
     </div>
-
-    <button class="btn" (click)="goToMain()">Return</button>
 
 </div>
 <ng-template #loading>

@@ -15,6 +15,7 @@ import { NotesService } from '../../shared/notes.service';
 export class HomePageComponent implements OnInit, OnDestroy {
   logged = false
   folderId = 'none';
+  folderName = 'Notes';
   parentFolder = 'none';
   notes$: Observable<Note[]> | null = null;
   folders$: Observable<Folder[]> | null = null;
@@ -27,10 +28,32 @@ export class HomePageComponent implements OnInit, OnDestroy {
     private router: Router,
     private auth: AuthService){}
 
+  goToCreateFolder(){
+    this.router.navigate(['/admin', 'create'], {queryParams:{parentFolder: this.folderId, typeOfNew: 'folder'}})
+
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth'})
+  };
+  goToCreateNote(){
+    this.router.navigate(['/admin', 'create'], {queryParams:{parentFolder: this.folderId, typeOfNew: 'note'}})
+    
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth'})
+  };
+
 
   goToUpperFolder(folderId: string | undefined){
     if(this.parentFolder !== 'none') {this.router.navigate(['/', this.parentFolder])}
     else {this.router.navigate(['/'])}
+
+    window.scroll({ 
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth'})
 
   }
 
@@ -41,7 +64,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       this.notes$ = this.notesService.getNotesByFolderId(this.folderId);
       this.folders$ = this.foldersService.getFoldersByFolderId(this.folderId);
 
-      if(this.parentFolder !== 'none')this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => this.parentFolder = folder.folder)
+      this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => {this.parentFolder = folder.folder; this.folderName = folder.title})
     });
   }
 
