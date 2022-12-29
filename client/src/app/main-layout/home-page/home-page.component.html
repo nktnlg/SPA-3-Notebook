@@ -1,26 +1,35 @@
 
 
 <div class="mb-1 top-btn-div">
-    <button *ngIf="folderId !== 'none'" class="btn top-btn" (click)="goToUpperFolder(parentFolder)">back</button>
+    <button *ngIf="folderId !== 'none'" class="btn top-btn" (click)="goToUpperFolder(parentFolderId)">back</button>
     <button *ngIf="logged" class="btn top-btn" (click)="goToCreateFolder()">New Folder</button>
     <button *ngIf="logged" class="btn top-btn" (click)="goToCreateNote()">New Note</button>
 </div>
 
-<h1 *ngIf="folderId !== 'none'">{{folderName}}</h1> <h1 *ngIf="folderId === 'none'">Notes</h1>
+<h1 *ngIf="folderId !== 'none'">{{parentFolderName}} / {{folderName}}</h1> <h1 *ngIf="folderId === 'none'">Notes</h1>
 
 <div *ngIf="folders$| async as folders; else loading">
     <div *ngIf="notes$ | async as notes; else loading">
-        <h3 *ngIf="folders.length>0">Folders</h3>
-        <app-folder
-        *ngFor="let folder of folders" 
-        [folder]="folder"
-        ></app-folder>
+        <div class="top-btn-div" *ngIf="folders.length>0">
+            <button class="btn btn-minimize" (click)="folderMinimizeSwitch()">{{folderMinimize}}</button> <h3>Folders</h3>
+        </div>
+        <div *ngIf="folderMinimize === '-'">
+            <app-folder
+            *ngFor="let folder of folders" 
+            [folder]="folder"
+            ></app-folder>
+        </div>
 
-        <h3 *ngIf="notes.length>0">Notes</h3>
-        <app-note
-        *ngFor="let note of notes" 
-        [note]="note"
-        ></app-note>
+        <div class="top-btn-div" *ngIf="notes.length>0">
+            <button class="btn btn-minimize" (click)="noteMinimizeSwitch()">{{noteMinimize}}</button> <h3>Notes</h3>
+        </div>
+        <div *ngIf="noteMinimize === '-'">
+        
+            <app-note
+            *ngFor="let note of notes" 
+            [note]="note"
+            ></app-note>
+        </div>
 
     </div>
 </div>

@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Note } from 'src/app/shared/interfaces';
+import { map, Observable, Subscription, tap } from 'rxjs';
+import { FoldersService } from 'src/app/shared/folders.service';
+import { Folder, Note } from 'src/app/shared/interfaces';
 import { NotesService } from 'src/app/shared/notes.service';
 import { AlertService } from '../../admin-shared/services/alert.service';
 
@@ -12,13 +13,16 @@ import { AlertService } from '../../admin-shared/services/alert.service';
   ]
 })
 export class DashboardPageComponent implements OnInit, OnDestroy{
+  modal: string | null = '';
+  switchModal(noteId: string| undefined){if(noteId){this.modal = noteId}else{this.modal = null}}
   notes: Note[] = [];
   notesSub: Subscription|undefined;
-  searchNotes = '';
   deleteSub: Subscription|undefined;
+  searchNotes = '';
 
   constructor(
     private notesService: NotesService,
+    private foldersService: FoldersService,
     private alertService: AlertService,
     private router: Router){}
 
@@ -34,8 +38,9 @@ export class DashboardPageComponent implements OnInit, OnDestroy{
   remove(id: string | undefined){
     if (!id)return;
     this.deleteSub = this.notesService.deleteNote(id).subscribe(()=>{
-      this.notes = this.notes.filter(note => note.id !== id)
-      this.alertService.danger('Note deleted')
+      this.notes = this.notes.filter(note => note.id !== id);
+      this.modal = null;
+      this.alertService.danger('Note deleted');
     })
   }
 
@@ -45,8 +50,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy{
     })
   }
   ngOnDestroy(): void {
-    if(this.notesSub) this.notesSub.unsubscribe;
-    if(this.deleteSub) this.deleteSub.unsubscribe;
+    if(this.notesSub) this.notesSub.unsubscribe();
+    if(this.deleteSub) this.deleteSub.unsubscribe();
   }
 
 }

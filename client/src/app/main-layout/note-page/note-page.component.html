@@ -1,5 +1,6 @@
 <div class="mb-1 top-btn-div">
-    <button class="btn top-btn" (click)="goToMain()">Return</button>
+    <button class="btn top-btn" (click)="goBack()">Return</button>
+    <button *ngIf="logged" class="btn top-btn" (click)="goToEdit()">Edit Note</button>
 </div>
 <div class="card"  *ngIf="note; else loading">
     <div class="note-header">
