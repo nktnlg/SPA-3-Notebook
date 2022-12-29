@@ -15,7 +15,11 @@ import { AlertService } from '../../admin-shared/services/alert.service';
 export class CreatePageComponent implements OnInit{
 
   parentFolder = 'none';
-  setParentToNone(){this.parentFolder='none'}
+  setParentToNone(){
+    this.parentFolder='none'
+    this.folderForm.controls['folderParent'].setValue(this.parentFolder)
+    this.noteForm.controls['noteParent'].setValue(this.parentFolder)
+  }
 
   newFolder = true;
   newNote = false;
@@ -40,7 +44,7 @@ export class CreatePageComponent implements OnInit{
   ngOnInit(): void {
     //Params reading
     this.route.queryParams.subscribe((params: Params)=> {
-      if(params['parentFolder']){}
+      if(params['parentFolder']){this.parentFolder = params['parentFolder']}
       if(params['typeOfNew']){params['typeOfNew'] === 'note' ? this.switchToNewNote() : this.switchToNewFolder()}
 
     })

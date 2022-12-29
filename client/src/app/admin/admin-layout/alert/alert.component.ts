@@ -10,8 +10,9 @@ import { AlertService } from '../../admin-shared/services/alert.service';
 export class AlertComponent implements OnInit, OnDestroy {
 @Input() 
 
-delay = 5000;
+delay = 6000;
 public text = '';
+public initial = 'initial'
 public type = 'success';
 alertSub: Subscription | null = null;
 
@@ -19,8 +20,25 @@ constructor(private alertSevice: AlertService){}
 
 ngOnInit(): void {
   this.alertSub = this.alertSevice.alert$.subscribe(alert=>{
+    if(!this.text){
     this.text = alert.text
-    this.type = alert.type
+    this.type = this.initial
+
+    const initialTimeout = setTimeout(
+      ()=>{
+        clearTimeout(initialTimeout);
+        this.type = alert.type;
+      }, 
+      0)
+    
+    const fadeoutTimeout = setTimeout(
+        ()=>{
+          clearTimeout(fadeoutTimeout);
+          this.type = this.initial;
+        }, 
+        this.delay-1000)
+    
+
 
     const timeout = setTimeout(
       ()=>{
@@ -28,6 +46,40 @@ ngOnInit(): void {
         this.text = '';
       }, 
       this.delay)
+    }else {
+      const fadeoutTimeout = setTimeout(
+        ()=>{
+          clearTimeout(fadeoutTimeout);
+          this.type = this.initial;
+          const initialTimeout = setTimeout(
+            ()=>{
+              clearTimeout(initialTimeout);
+              this.text = alert.text;
+
+              //crazy here
+              const initialInnerTimeout = setTimeout(
+                ()=>{
+                  clearTimeout(initialInnerTimeout);
+                  this.type = alert.type;
+                }, 
+                0)
+              
+              const fadeoutInnerTimeout = setTimeout(
+                  ()=>{
+                    clearTimeout(fadeoutInnerTimeout);
+                    this.type = this.initial;
+                  }, 
+                  this.delay-1000)
+              //crazy here
+
+              
+            }, 
+            1000)
+
+        }, 
+        0)
+
+    }
   })
 }
 
