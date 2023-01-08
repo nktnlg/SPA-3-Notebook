@@ -9,10 +9,12 @@ import { AuthService } from '../admin-shared/services/auth.service';
   ]
 })
 export class AdminLayoutComponent {
+  dropdown = false;
   constructor(private router: Router, public auth: AuthService){
   }
 
   goToMain(){
+    this.dropdown = false;
     this.router.navigate(['/']);
     window.scroll({ 
       top: 0, 
@@ -21,6 +23,7 @@ export class AdminLayoutComponent {
   }
 
   goToDahboard(){
+    this.dropdown = false;
     this.router.navigate(['/admin', 'dashboard']);
     window.scroll({ 
       top: 0, 
@@ -29,6 +32,7 @@ export class AdminLayoutComponent {
   }
 
   goToCreate(){
+    this.dropdown = false;
     this.router.navigate(['/admin', 'create']);
     window.scroll({ 
       top: 0, 
@@ -37,6 +41,7 @@ export class AdminLayoutComponent {
   }
 
   logout(event: Event){
+    this.dropdown = false;
     event.preventDefault();
     this.auth.logout();
     this.router.navigate(['/admin', 'login']);
@@ -45,6 +50,10 @@ export class AdminLayoutComponent {
       top: 0, 
       left: 0, 
       behavior: 'smooth'})
+  }
+
+  toggleDropdown(){
+    this.dropdown = !this.dropdown
   }
 
 }

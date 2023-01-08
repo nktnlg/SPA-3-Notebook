@@ -41,7 +41,7 @@ body {
     background: $contrast-element-color;
 }
 
-
+//HEADER
 .header {
     font-family: sans-serif;
 
@@ -60,16 +60,19 @@ body {
 }
 
 .header-title{
-    a {text-decoration: none;};
-    a:visited {color: $text-color};
+    font-size: 1.75rem;
     word-spacing: 0.5rem;
     padding-left: 1rem;
 }
 
-.header-options {
-    display: flex;
-    align-items: stretch;
-
+//wide options
+.header-options-wide {
+    display: none;
+}
+@media (min-width: 768px) {
+    .header-options-wide {
+        display: flex;
+    }
 }
 
 .header-option {
@@ -98,6 +101,79 @@ body {
 .active {
     font-size: 1rem;
     color: $text-color;
+}
+
+//thin options
+.header-options-thin {
+    display: none;
+}
+@media (max-width: 768px) {
+    .header-options-thin {
+        padding-right: 1rem;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.dropdown {
+    position: relative;
+}
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.25rem);
+
+    border-radius: 0.5rem;
+    background-color: $contrast-element-color;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+    padding: 0.75rem;
+    //inactive
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-1rem);
+    transition: 150ms ease-in-out;
+
+
+    z-index: 2;
+}
+.dropdown-menu-active {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.header-option-thin {
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+    color: $text-secondary-color;
+    padding: 2rem;
+
+    border-radius: 0.5rem;
+
+    text-transform: uppercase;
+    font-weight: 600;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 0.875rem; /* 14px */
+    line-height: 1rem; /* 20px */
+
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+
+    
+}
+
+.header-option-thin:hover {
+    background-color: $hover-base-color;
+}
+
+.active-thin {
+    font-size: 1rem;
+    color: $text-color;
+    background-color: $hover-base-color;
 }
 
 //content
@@ -181,8 +257,6 @@ body {
     line-height: 1.5rem; /* 24px */ 
     
 }
-
-
 .form-input-author-flex{
     display: flex;
     gap: 1rem;
@@ -318,8 +392,8 @@ body {
 .btn {
     text-transform: uppercase;
     font-weight: 600;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     font-size: 0.875rem; 
     line-height: 1rem; 
 
@@ -401,3 +475,18 @@ body {
     margin-right: 1rem;
 }
 
+
+//SVG
+.svg-icon {
+    width: 1.5em;
+    height: 1.5em;
+}
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+    fill: $text-secondary-color;
+} 
+.svg-icon circle {
+    stroke: $text-secondary-color;
+    stroke-width: 1;
+}
