@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { map, Observable } from "rxjs";
 import { environment } from "src/environment/environment";
-import { FbCreateResponse, FbGetFoldersResponse, Folder } from "./interfaces";
+import { FbCreateResponse, FbGetFoldersResponse, Folder, RootFolder } from "./interfaces";
 
 @Injectable({providedIn: 'root'})
 export class FoldersService{
@@ -55,4 +55,11 @@ export class FoldersService{
         )
     }
 
+    getRootFolderName(): Observable<RootFolder>{
+        return this.http.get<RootFolder>(`${environment.fbDBUrl}/root/-NLIpPLKAIVoLDeNbTuO.json`)
+    }
+
+    setRootFolderName(newName: string): Observable<RootFolder>{
+        return this.http.patch<RootFolder>(`${environment.fbDBUrl}/root/-NLIpPLKAIVoLDeNbTuO.json`, {rootTitle: newName})
+    }
 }

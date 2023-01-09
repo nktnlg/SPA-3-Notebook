@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable, Subscription, } from 'rxjs';
 import { AuthService } from 'src/app/admin/admin-shared/services/auth.service';
@@ -13,7 +14,29 @@ import { NotesService } from '../../shared/notes.service';
   ]
 })
 export class HomePageComponent implements OnInit, OnDestroy {
+  constructor(
+    private notesService: NotesService,
+    private route: ActivatedRoute,
+    private foldersService: FoldersService,
+    private router: Router,
+    private auth: AuthService){}
+
   logged = false;
+
+  rootNameForm!: FormGroup;
+  editRoot = false;
+  editRootName(bool: boolean){this.editRoot = bool}
+  rootName$: Subscription | null = null;
+  rootName = '';
+  setNewRootName(){
+    this.foldersService.setRootFolderName(this.rootNameForm.value.title).subscribe((res)=>{
+      this.rootNameForm.reset();
+      this.editRootName(false);
+      this.rootName = res.rootTitle;
+    })
+    
+  }
+  
 
   folderMinimize = '-';
   folderMinimizeSwitch(){if(this.folderMinimize === '-'){this.folderMinimize = '+'}else{this.folderMinimize = '-'}};
@@ -29,12 +52,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   folders$: Observable<Folder[]> | null = null;
   parent$: Subscription | null = null;
 
-  constructor(
-    private notesService: NotesService,
-    private route: ActivatedRoute,
-    private foldersService: FoldersService,
-    private router: Router,
-    private auth: AuthService){}
+  
 
   goToCreateFolder(){
     this.router.navigate(['/admin', 'create'], {queryParams:{parentFolderId: this.folderId, parentFolderName: this.folderName, typeOfNew: 'folder'}})
@@ -66,17 +84,25 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(){
+
+    this.rootName$ = this.foldersService.getRootFolderName().subscribe( a => {this.rootName = a.rootTitle})
+
+    this.rootNameForm = new FormGroup({
+      title: new FormControl(null, [Validators.required])
+    })
+
     if (this.auth.token) this.logged = true;
     this.route.params.subscribe((params: Params)=>{
       if(params['folder'])this.folderId = params['folder']
       this.notes$ = this.notesService.getNotesByFolderId(this.folderId);
       this.folders$ = this.foldersService.getFoldersByFolderId(this.folderId);
 
-      if(this.folderId !== 'none')this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => {this.parentFolderId = folder.parentFolderId; this.parentFolderName = folder.parentFolderName; this.folderName = folder.title})
+      if(this.folderId !== 'none')this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => {this.parentFolderId = folder.parentFolderId; this.parentFolderName = folder.parentFolderName; this.folderName = folder.title; if(this.parentFolderName === 'none'){this.parentFolderName = this.rootName}})
     });
   }
 
   ngOnDestroy(): void {
-    if (this.parent$) this.parent$.unsubscribe;
+    if (this.parent$) this.parent$.unsubscribe();
+    if (this.rootName$) this.rootName$.unsubscribe();
   }
 }

@@ -18,8 +18,6 @@ import { ModalComponent } from './admin-layout/modal/modal.component';
     imports: [
         SharedModule,
         CommonModule, 
-        FormsModule,
-        ReactiveFormsModule,
         RouterModule.forChild([
         {path: '', component: AdminLayoutComponent, children: [
             {path: '', redirectTo: '/admin/login', pathMatch: 'full'},

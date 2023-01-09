@@ -1,6 +1,7 @@
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.snow.css';
 
+
 //GRAY THEME
 $text-color: #333;
 $text-secondary-color: #666;
@@ -41,6 +42,10 @@ body {
     background: $contrast-element-color;
 }
 
+h1 {
+    margin: 0.5rem;
+    height: 2rem;
+}
 //HEADER
 .header {
     font-family: sans-serif;
@@ -190,6 +195,18 @@ body {
 
 
     overflow-x: scroll;
+}
+
+.folder-name {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.root-input {
+    height: 2rem;
+    margin: 0.5rem;
+    box-sizing: border-box;
 }
 
 .top-btn-div{
