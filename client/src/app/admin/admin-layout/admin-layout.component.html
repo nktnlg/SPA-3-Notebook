@@ -2,11 +2,32 @@
 <div class="header header-admin">
     <h1 class="header-title">Notebook Editor</h1>
 
-        <div class="header-options" *ngIf="auth.isAuth()">
+        <div class="header-options-wide" *ngIf="auth.isAuth()">
             <a (click)="goToMain()" class="header-option">Main</a>
             <a (click)="goToDahboard()" [routerLink]="['/admin', 'dashboard']" class="header-option" routerLinkActive="active">Dashboard</a>
             <a (click)="goToCreate()" [routerLink]="['/admin', 'create']" class="header-option" routerLinkActive="active">Create</a>
             <a href="#" (click)="logout($event)" class="header-option">logout</a>
+        </div>
+
+        <div class="header-options-thin" *ngIf="auth.isAuth()">
+            <div class="dropdown">
+                <button class="btn" (click)="toggleDropdown()">
+                    <svg class="svg-icon" viewBox="0 0 20 20">
+                        <path fill="none" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314
+                            c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743
+                            s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314
+                            c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path>
+                    </svg>
+                </button>
+                <div class="dropdown-menu" [class.dropdown-menu-active]="dropdown">
+                    <a (click)="goToMain()" class="header-option-thin">Main</a>
+                    <a (click)="goToDahboard()" [routerLink]="['/admin', 'dashboard']" class="header-option-thin" routerLinkActive="active-thin">Dashboard</a>
+                    <a (click)="goToCreate()" [routerLink]="['/admin', 'create']" class="header-option-thin" routerLinkActive="active-thin">Create</a>
+                    <a href="#" (click)="logout($event)" class="header-option-thin">logout</a>
+                </div>
+
+            </div>
+                
         </div>
     
 </div>

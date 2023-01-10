@@ -1,5 +1,5 @@
 <div *ngIf="form; else loading">
-    <form class="card note-form" [formGroup]="form" (ngSubmit)="submit()">
+    <form class="card content-form" [formGroup]="form" (ngSubmit)="submit()">
         <h1>Edit note</h1>
         <div id="form-title" class="form-control" [ngClass]="{invalid: form.get('title')?.touched && form.get('title')?.invalid}">
             <input id="form-title-input" name="form-title-input" formControlName="title" class="form-input" type="text" placeholder="Title">

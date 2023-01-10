@@ -1,4 +1,4 @@
-<form class="card card-form" [formGroup]="form" (ngSubmit)="submit()" [ngClass]="{invalid: retry}">
+<form class="card auth-form" [formGroup]="form" (ngSubmit)="submit()" [ngClass]="{invalid: retry}">
     <h2 class="form-title">Entering Editor Mode</h2>
     <div id="form-email" class="form-control" [ngClass]="{invalid: form.get('email')?.touched && form.get('email')?.invalid}">
         <input id="form-email-input" name="form-email-input" formControlName="email" class="form-input" type="email" placeholder="Email">

@@ -1,12 +1,12 @@
-<div class="mb-1 top-btn-div note-form-btns">
+<div class="mb-1 top-btn-div content-form-btns">
     <button class="btn top-btn" (click)="goToDashboard()">Back to dashboard</button>
 </div>
-<div class="mb-1 top-btn-div note-form-btns">
+<div class="mb-1 top-btn-div content-form-btns">
     <button [disabled]="newFolder" class="btn top-btn" (click)="switchToNewFolder()">Create Folder</button>
     <button [disabled]="newNote" class="btn top-btn" (click)="switchToNewNote()">Create Note</button>
 </div>
 
-<form id="new-folder-form" *ngIf="newFolder" class="card note-form" [formGroup]="folderForm" (ngSubmit)="submitFolder()">
+<form id="new-folder-form" *ngIf="newFolder" class="card content-form" [formGroup]="folderForm" (ngSubmit)="submitFolder()">
     <h1>Create new folder</h1>
     <div id="form-folder-title" class="form-control" [ngClass]="{invalid: folderForm.get('folderTitle')?.touched && folderForm.get('folderTitle')?.invalid}">
         <input id="form-folder-title-input" name="form-folder-title-input" formControlName="folderTitle" class="form-input" type="text" placeholder="Folder name">
@@ -43,7 +43,7 @@
     <button class="btn" type="submit" [disabled]="folderForm.invalid">Create folder</button>
 </form>
 
-<form id="new-note-form" *ngIf="newNote" class="card note-form" [formGroup]="noteForm" (ngSubmit)="submitNote()">
+<form id="new-note-form" *ngIf="newNote" class="card content-form" [formGroup]="noteForm" (ngSubmit)="submitNote()">
     <h1>Create new note</h1>
     <div id="form-note-title" class="form-control" [ngClass]="{invalid: noteForm.get('noteTitle')?.touched && noteForm.get('noteTitle')?.invalid}">
         <input id="form-note-title-input" name="form-note-title-input" formControlName="noteTitle" class="form-input" type="text" placeholder="Title">

@@ -44,3 +44,7 @@ export interface FbGetNotesResponse {
 export interface FbGetFoldersResponse {
     [key: string]: Folder
 }
+
+export interface RootFolder {
+    rootTitle: string
+}

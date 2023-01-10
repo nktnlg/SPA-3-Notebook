@@ -1,5 +1,6 @@
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { QuillModule } from "ngx-quill";
 import { BotFooterComponent } from "./footer/bot-footer/bot-footer.component";
 import { FooterComponent } from "./footer/footer.component";
@@ -12,11 +13,13 @@ import { TopFooterComponent } from "./footer/top-footer/top-footer.component";
         FooterComponent,
         TopFooterComponent,
         MidFooterComponent,
-        BotFooterComponent
+        BotFooterComponent,
     ],
     imports:[
         HttpClientModule,
-        QuillModule.forRoot()
+        QuillModule.forRoot(),
+        FormsModule,
+        ReactiveFormsModule
     ],
     exports:[
         HttpClientModule,
@@ -24,7 +27,9 @@ import { TopFooterComponent } from "./footer/top-footer/top-footer.component";
         FooterComponent,
         TopFooterComponent,
         MidFooterComponent,
-        BotFooterComponent
+        BotFooterComponent,
+        FormsModule,
+        ReactiveFormsModule
     ],
 })
 

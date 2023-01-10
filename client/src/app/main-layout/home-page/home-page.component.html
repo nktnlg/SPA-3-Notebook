@@ -2,11 +2,40 @@
 
 <div class="mb-1 top-btn-div">
     <button *ngIf="folderId !== 'none'" class="btn top-btn" (click)="goToUpperFolder(parentFolderId)">back</button>
-    <button *ngIf="logged" class="btn top-btn" (click)="goToCreateFolder()">New Folder</button>
-    <button *ngIf="logged" class="btn top-btn" (click)="goToCreateNote()">New Note</button>
+    <button *ngIf="logged" class="btn top-btn" (click)="goToCreateFolder()">Create New Folder</button>
+    <button *ngIf="logged" class="btn top-btn" (click)="goToCreateNote()">Create New Note</button>
 </div>
 
-<h1 *ngIf="folderId !== 'none'">{{parentFolderName}} / {{folderName}}</h1> <h1 *ngIf="folderId === 'none'">Notes</h1>
+<h1 *ngIf="folderId !== 'none'">{{parentFolderName}} / {{folderName}}</h1> 
+<div *ngIf="folderId === 'none'">
+    <div *ngIf="!editRoot" class="folder-name">
+        <a (click)="editRootName(true)" *ngIf="logged">
+            <svg class="svg-icon" viewBox="0 0 20 20">
+                <path fill="none" d="M19.404,6.65l-5.998-5.996c-0.292-0.292-0.765-0.292-1.056,0l-2.22,2.22l-8.311,8.313l-0.003,0.001v0.003l-0.161,0.161c-0.114,0.112-0.187,0.258-0.21,0.417l-1.059,7.051c-0.035,0.233,0.044,0.47,0.21,0.639c0.143,0.14,0.333,0.219,0.528,0.219c0.038,0,0.073-0.003,0.111-0.009l7.054-1.055c0.158-0.025,0.306-0.098,0.417-0.211l8.478-8.476l2.22-2.22C19.695,7.414,19.695,6.941,19.404,6.65z M8.341,16.656l-0.989-0.99l7.258-7.258l0.989,0.99L8.341,16.656z M2.332,15.919l0.411-2.748l4.143,4.143l-2.748,0.41L2.332,15.919z M13.554,7.351L6.296,14.61l-0.849-0.848l7.259-7.258l0.423,0.424L13.554,7.351zM10.658,4.457l0.992,0.99l-7.259,7.258L3.4,11.715L10.658,4.457z M16.656,8.342l-1.517-1.517V6.823h-0.003l-0.951-0.951l-2.471-2.471l1.164-1.164l4.942,4.94L16.656,8.342z"></path>
+            </svg>
+        </a>
+        <h1>{{rootName}}</h1>
+    </div>
+    <form *ngIf="editRoot" class="folder-name" [formGroup]="rootNameForm" (ngSubmit)="setNewRootName()">
+        <a type="submit">
+            <svg class="svg-icon" viewBox="0 0 20 20">
+                <path fill="none" d="M7.197,16.963H7.195c-0.204,0-0.399-0.083-0.544-0.227l-6.039-6.082c-0.3-0.302-0.297-0.788,0.003-1.087
+                C0.919,9.266,1.404,9.269,1.702,9.57l5.495,5.536L18.221,4.083c0.301-0.301,0.787-0.301,1.087,0c0.301,0.3,0.301,0.787,0,1.087
+                L7.741,16.738C7.596,16.882,7.401,16.963,7.197,16.963z"></path>
+            </svg>
+        </a>
+        <a (click)="editRootName(false)">
+            <svg class="svg-icon" viewBox="0 0 20 20">
+                <path fill="none" d="M11.469,10l7.08-7.08c0.406-0.406,0.406-1.064,0-1.469c-0.406-0.406-1.063-0.406-1.469,0L10,8.53l-7.081-7.08
+                c-0.406-0.406-1.064-0.406-1.469,0c-0.406,0.406-0.406,1.063,0,1.469L8.531,10L1.45,17.081c-0.406,0.406-0.406,1.064,0,1.469
+                c0.203,0.203,0.469,0.304,0.735,0.304c0.266,0,0.531-0.101,0.735-0.304L10,11.469l7.08,7.081c0.203,0.203,0.469,0.304,0.735,0.304
+                c0.267,0,0.532-0.101,0.735-0.304c0.406-0.406,0.406-1.064,0-1.469L11.469,10z"></path>
+            </svg>
+        </a>
+        <input type="text" class="root-input" formControlName="title">
+    </form>
+    
+</div>
 
 <div *ngIf="folders$| async as folders; else loading">
     <div *ngIf="notes$ | async as notes; else loading">
