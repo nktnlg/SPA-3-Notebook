@@ -97,6 +97,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       this.notes$ = this.notesService.getNotesByFolderId(this.folderId);
       this.folders$ = this.foldersService.getFoldersByFolderId(this.folderId);
 
+      //unreadable, rephrase
       if(this.folderId !== 'none')this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => {this.parentFolderId = folder.parentFolderId; this.parentFolderName = folder.parentFolderName; this.folderName = folder.title; if(this.parentFolderName === 'none'){this.parentFolderName = this.rootName}})
     });
   }
