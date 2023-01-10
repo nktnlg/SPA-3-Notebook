@@ -241,19 +241,20 @@ h1 {
 }
 
 // LOGIN
-.card-form {
+//old name .card-form
+.auth-form {
     font-family: sans-serif;
     max-width: 23rem;
     margin: 0 auto;
     align-items: center;
 }
-
-.note-form {
+//old name .note-form
+.content-form {
     font-family: sans-serif;
     max-width: 40rem;
     margin: 1rem auto;
 }
-.note-form-btns{
+.content-form-btns{
     max-width: 42rem;
     margin: 0 auto;
 }
