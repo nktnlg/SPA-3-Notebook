@@ -36,10 +36,9 @@ export class EditPageComponent implements OnInit, OnDestroy{
     this.updateSub = this.notesService.updateNote({
       ...this.note,
       text: this.form.value.text,
-      title: this.form.value.title
-      //parentFolderId: this.form.value.folder.id,
-      //parentFolderName: this.form.value.folder.title,
-    }).subscribe(()=>{this.load = false; this.alertService.success('Note edited')})
+      title: this.form.value.title,
+      parentFolderId: this.form.value.folder
+    }).subscribe(()=>{this.load = false; this.alertService.success('Note edited'); console.log(this.form.value.folder)})
   };
 
   ngOnInit(): void {
@@ -52,7 +51,8 @@ export class EditPageComponent implements OnInit, OnDestroy{
         this.note = note;
         this.form = new FormGroup({
           title: new FormControl(note.title, Validators.required),
-          text: new FormControl(note.text, Validators.required)
+          text: new FormControl(note.text, Validators.required),
+          folder: new FormControl(note.parentFolderId, Validators.required)
     })}, 
       (error)=>{
         this.router.navigate(['/admin', 'dashboard']);

@@ -28,15 +28,10 @@
         </div>
     </div>
 
-    <div id="form-folder-parent" class="form-control" [ngClass]="{invalid: folderForm.get('folderParent')?.touched && folderForm.get('folderParent')?.invalid}">
-        <div class="form-input-author-flex">
-            <input id="form-folder-parent-input" name="form-folder-parent-input" formControlName="folderParent" class="form-input form-input-author" type="text" placeholder="parent" readonly>
-            <label class="form-label" for="form-folder-parent-input">Parent Folder</label>
-            <button class="btn form-input-author-btn" type="button" (click)="setParentToNone()" [disabled]="parentFolderName === 'none'">Set Default</button>
-        </div>
-        <div *ngIf="folderForm.get('folderParent')?.touched" class="form-validation">
-            <small *ngIf="folderForm.get('folderParent')?.errors?.['required']">Cannot be empty</small>
-        </div>
+    <div id="form-folder-parent" class="form-control">
+        <select formControlName="folderParent" *ngIf="folders$ | async as folders;" name="form-folder-selection" id="form-folder-selection" class="form-folder-selection">
+            <option *ngFor="let folder of folders" [value]="folder.id">{{folder.title}}</option>
+        </select>
     </div>
 
 
@@ -69,15 +64,11 @@
         </div>
     </div>
 
-    <div id="form-note-parent" class="form-control" [ngClass]="{invalid: noteForm.get('noteParent')?.touched && noteForm.get('noteParent')?.invalid}">
-        <div class="form-input-author-flex">
-            <input id="form-note-parent-input" name="form-note-parent-input" formControlName="noteParent" class="form-input form-input-author" type="text" placeholder="parent" readonly>
-            <label class="form-label" for="form-note-parent-input">Parent Folder</label>
-            <button class="btn form-input-author-btn" type="button" (click)="setParentToNone()" [disabled]="parentFolderName === 'none'">Set Default</button>
-        </div>
-        <div *ngIf="noteForm.get('noteParent')?.touched" class="form-validation">
-            <small *ngIf="noteForm.get('noteParent')?.errors?.['required']">Cannot be empty</small>
-        </div>
+    <div id="form-note-parent" class="form-control">
+        <div>Parent Folder</div>
+            <select formControlName="noteParent" *ngIf="folders$ | async as folders;" name="form-folder-selection" id="form-folder-selection" class="form-folder-selection">
+                <option *ngFor="let folder of folders" [value]="folder.id">{{folder.title}}</option>
+            </select>
     </div>
 
     <button class="btn" type="submit" [disabled]="noteForm.invalid">Create note</button>

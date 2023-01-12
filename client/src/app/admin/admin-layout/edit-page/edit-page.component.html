@@ -15,7 +15,7 @@
         </div>
         <div class="form-control">
             <div>Parent Folder</div>
-            <select *ngIf="folders$ | async as folders;" name="form-folder-selection" id="form-folder-selection" class="form-folder-selection">
+            <select formControlName="folder" *ngIf="folders$ | async as folders;" name="form-folder-selection" id="form-folder-selection" class="form-folder-selection">
                 <option *ngFor="let folder of folders" [value]="folder.id">{{folder.title}}</option>
             </select>
         </div>

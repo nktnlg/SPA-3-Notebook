@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable, Subscription, } from 'rxjs';
+import { Observable, Subscription, switchMap, } from 'rxjs';
 import { AuthService } from 'src/app/admin/admin-shared/services/auth.service';
 import { FoldersService } from 'src/app/shared/folders.service';
 import { Folder, Note } from '../../shared/interfaces';
@@ -55,7 +55,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   
 
   goToCreateFolder(){
-    this.router.navigate(['/admin', 'create'], {queryParams:{parentFolderId: this.folderId, parentFolderName: this.folderName, typeOfNew: 'folder'}})
+    this.router.navigate(['/admin', 'create'], {queryParams:{parentFolderId: this.folderId, typeOfNew: 'folder'}})
 
     window.scroll({ 
       top: 0, 
@@ -63,7 +63,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
       behavior: 'smooth'})
   };
   goToCreateNote(){
-    this.router.navigate(['/admin', 'create'], {queryParams:{parentFolderId: this.folderId, parentFolderName: this.folderName, typeOfNew: 'note'}})
+    this.router.navigate(['/admin', 'create'], {queryParams:{parentFolderId: this.folderId, typeOfNew: 'note'}})
     
     window.scroll({ 
       top: 0, 
@@ -98,7 +98,16 @@ export class HomePageComponent implements OnInit, OnDestroy {
       this.folders$ = this.foldersService.getFoldersByFolderId(this.folderId);
 
       //unreadable, rephrase
-      if(this.folderId !== 'none')this.parent$ = this.foldersService.getFolderById(this.folderId).subscribe(folder => {this.parentFolderId = folder.parentFolderId; this.parentFolderName = folder.parentFolderName; this.folderName = folder.title; if(this.parentFolderName === 'none'){this.parentFolderName = this.rootName}})
+      if(this.folderId !== 'none')this.parent$ = this.foldersService
+      .getFolderById(this.folderId)
+      .subscribe(
+        folder => {
+          this.parentFolderId = folder.parentFolderId; 
+          //gonna use a get here i guess, and delete the parentFolderName property from interface
+          const sub = this.foldersService.getFolderById(folder.parentFolderId).subscribe(folder => this.parentFolderName = folder.title)
+          sub.unsubscribe();
+          this.folderName = folder.title; 
+          if(this.parentFolderName === 'none'){this.parentFolderName = this.rootName}})
     });
   }
 
