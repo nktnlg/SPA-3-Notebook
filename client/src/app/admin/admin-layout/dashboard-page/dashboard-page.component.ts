@@ -47,6 +47,11 @@ export class DashboardPageComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.notesSub = this.notesService.getNotes().subscribe(notes => {
       this.notes = notes
+      this.notes.map(localNote => {
+        const sub = this.foldersService.getFolderById(localNote.parentFolderId)
+        .subscribe(folder => localNote.parentFolderName = folder.title)
+        sub.unsubscribe();
+      })
     })
   }
   ngOnDestroy(): void {
