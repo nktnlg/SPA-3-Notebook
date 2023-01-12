@@ -97,13 +97,11 @@ export class HomePageComponent implements OnInit, OnDestroy {
       this.notes$ = this.notesService.getNotesByFolderId(this.folderId);
       this.folders$ = this.foldersService.getFoldersByFolderId(this.folderId);
 
-      //unreadable, rephrase
       if(this.folderId !== 'none')this.parent$ = this.foldersService
       .getFolderById(this.folderId)
       .subscribe(
         folder => {
           this.parentFolderId = folder.parentFolderId; 
-          //gonna use a get here i guess, and delete the parentFolderName property from interface
           const sub = this.foldersService.getFolderById(folder.parentFolderId).subscribe(folder => this.parentFolderName = folder.title)
           sub.unsubscribe();
           this.folderName = folder.title; 

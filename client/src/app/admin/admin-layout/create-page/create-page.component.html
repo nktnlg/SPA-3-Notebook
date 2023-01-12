@@ -30,6 +30,7 @@
 
     <div id="form-folder-parent" class="form-control">
         <select formControlName="folderParent" *ngIf="folders$ | async as folders;" name="form-folder-selection" id="form-folder-selection" class="form-folder-selection">
+            <option value="none">Root folder</option>
             <option *ngFor="let folder of folders" [value]="folder.id">{{folder.title}}</option>
         </select>
     </div>
@@ -67,6 +68,7 @@
     <div id="form-note-parent" class="form-control">
         <div>Parent Folder</div>
             <select formControlName="noteParent" *ngIf="folders$ | async as folders;" name="form-folder-selection" id="form-folder-selection" class="form-folder-selection">
+                <option value="none">Root folder</option>
                 <option *ngFor="let folder of folders" [value]="folder.id">{{folder.title}}</option>
             </select>
     </div>
