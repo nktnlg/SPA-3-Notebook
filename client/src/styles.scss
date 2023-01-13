@@ -1,6 +1,15 @@
 @import '~quill/dist/quill.core.css';
 @import '~quill/dist/quill.snow.css';
 
+//RAINBOW
+$base-red: rgb(255, 190, 190);
+$base-orange: rgb(255, 230, 190);
+$base-yellow: rgb(255, 255, 190);
+$base-green: rgb(190, 255, 190);
+$base-cyan: rgb(190, 255, 255);
+$base-violet: rgb(190, 190, 255);
+$base-rose: rgb(255, 190, 255);
+
 
 //GRAY THEME
 $text-color: #333;
@@ -230,6 +239,14 @@ h1 {
 
     margin-bottom: 1rem;
 }
+.card-red{background-color: $base-red;}
+.card-orange{background-color: $base-orange;}
+.card-yellow{background-color: $base-yellow;}
+.card-green{background-color: $base-green;}
+.card-cyan{background-color: $base-cyan;}
+.card-violet{background-color: $base-violet;}
+.card-rose{background-color: $base-rose;}
+
 .card:hover {
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
     transition-duration: 500ms;
@@ -325,7 +342,7 @@ h1 {
     color: $text-color;
 }
 
-.form-folder-selection {
+.form-selection {
     font-size: 1rem;
     height: 2rem;
     width: 100%;
@@ -453,7 +470,14 @@ h1 {
     background-color: $hover-base-color;
     color: $text-ghost;
 }
-
+.not-btn{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font-family: inherit;
+	outline: inherit;
+}
 
 //FOOTER
 .footer {

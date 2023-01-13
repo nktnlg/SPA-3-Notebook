@@ -51,6 +51,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   notes$: Observable<Note[]> | null = null;
   folders$: Observable<Folder[]> | null = null;
   parent$: Subscription | null = null;
+  pSub: Subscription | null = null;
 
   
 
@@ -102,15 +103,23 @@ export class HomePageComponent implements OnInit, OnDestroy {
       .subscribe(
         folder => {
           this.parentFolderId = folder.parentFolderId; 
-          const sub = this.foldersService.getFolderById(folder.parentFolderId).subscribe(folder => this.parentFolderName = folder.title)
-          sub.unsubscribe();
-          this.folderName = folder.title; 
-          if(this.parentFolderName === 'none'){this.parentFolderName = this.rootName}})
-    });
+          if(folder.parentFolderId !== 'none'){
+            this.pSub = this.foldersService.getFolderById(folder.parentFolderId).subscribe(
+              folder => this.parentFolderName = folder.title,
+              error => {console.error(error)})
+            }else{this.parentFolderName = this.rootName}
+
+          this.folderName = folder.title;
+        },
+        error => {console.error(error)},
+        () => {}
+      )}
+    );
   }
 
   ngOnDestroy(): void {
     if (this.parent$) this.parent$.unsubscribe();
     if (this.rootName$) this.rootName$.unsubscribe();
+    if (this.pSub) this.pSub.unsubscribe();
   }
 }

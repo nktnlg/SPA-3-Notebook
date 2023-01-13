@@ -6,6 +6,7 @@
     <button [disabled]="newNote" class="btn top-btn" (click)="switchToNewNote()">Create Note</button>
 </div>
 
+
 <form id="new-folder-form" *ngIf="newFolder" class="card content-form" [formGroup]="folderForm" (ngSubmit)="submitFolder()">
     <h1>Create new folder</h1>
     <div id="form-folder-title" class="form-control" [ngClass]="{invalid: folderForm.get('folderTitle')?.touched && folderForm.get('folderTitle')?.invalid}">
@@ -29,15 +30,31 @@
     </div>
 
     <div id="form-folder-parent" class="form-control">
-        <select formControlName="folderParent" *ngIf="folders$ | async as folders;" name="form-folder-selection" id="form-folder-selection" class="form-folder-selection">
+        <select formControlName="folderParent" *ngIf="folders$ | async as folders;" name="form-folder-selection" id="form-folder-selection" class="form-selection">
             <option value="none">Root folder</option>
             <option *ngFor="let folder of folders" [value]="folder.id">{{folder.title}}</option>
+        </select>
+    </div>
+    <div id="form-folder-color" class="form-control">
+        <div>Choose Color</div>
+        <select formControlName="folderColor" name="form-folder-color-selection" id="form-folder-color-selection" class="form-selection">
+            <option value="">Gray</option>
+            <option value="red">Red</option>
+            <option value="orange">Orange</option>
+            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
+            <option value="cyan">Cyan</option>
+            <option value="violet">Violet</option>
+            <option value="rose">Rose</option>
         </select>
     </div>
 
 
     <button class="btn" type="submit" [disabled]="folderForm.invalid">Create folder</button>
 </form>
+
+
+
 
 <form id="new-note-form" *ngIf="newNote" class="card content-form" [formGroup]="noteForm" (ngSubmit)="submitNote()">
     <h1>Create new note</h1>
@@ -67,10 +84,23 @@
 
     <div id="form-note-parent" class="form-control">
         <div>Parent Folder</div>
-            <select formControlName="noteParent" *ngIf="folders$ | async as folders;" name="form-folder-selection" id="form-folder-selection" class="form-folder-selection">
+            <select formControlName="noteParent" *ngIf="folders$ | async as folders;" name="form-note-selection" id="form-note-selection" class="form-selection">
                 <option value="none">Root folder</option>
                 <option *ngFor="let folder of folders" [value]="folder.id">{{folder.title}}</option>
             </select>
+    </div>
+    <div id="form-note-color" class="form-control">
+        <div>Choose Color</div>
+        <select formControlName="noteColor" name="form-note-color-selection" id="form-note-color-selection" class="form-selection">
+            <option value="">Gray</option>
+            <option value="red">Red</option>
+            <option value="orange">Orange</option>
+            <option value="yellow">Yellow</option>
+            <option value="green">Green</option>
+            <option value="cyan">Cyan</option>
+            <option value="violet">Violet</option>
+            <option value="rose">Rose</option>
+        </select>
     </div>
 
     <button class="btn" type="submit" [disabled]="noteForm.invalid">Create note</button>

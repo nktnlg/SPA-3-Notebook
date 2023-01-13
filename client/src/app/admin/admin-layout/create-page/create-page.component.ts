@@ -43,6 +43,7 @@ export class CreatePageComponent implements OnInit{
       author: this.noteForm.value.noteAuthor,
       date: new Date(),
       parentFolderId: this.noteForm.value.noteParent,
+      color: this.noteForm.value.noteColor,
     }
 
     this.notesService.create(note).subscribe(()=>{
@@ -56,7 +57,8 @@ export class CreatePageComponent implements OnInit{
       title: this.folderForm.value.folderTitle,
       author: this.folderForm.value.folderAuthor,
       date: new Date(),
-      parentFolderId: this.folderForm.value.folderParent
+      parentFolderId: this.folderForm.value.folderParent,
+      color: this.folderForm.value.folderColor
     }
     
     this.foldersService.create(folder).subscribe(()=>{
@@ -87,7 +89,8 @@ export class CreatePageComponent implements OnInit{
     this.folderForm = new FormGroup({
       folderParent: new FormControl(this.parentFolderId, [Validators.required]),
       folderTitle: new FormControl(null, [Validators.required]),
-      folderAuthor: new FormControl(null, [Validators.required])
+      folderAuthor: new FormControl(null, [Validators.required]),
+      folderColor: new FormControl(null)
     })
 
     //Note form
@@ -95,10 +98,13 @@ export class CreatePageComponent implements OnInit{
       noteParent: new FormControl(this.parentFolderId, [Validators.required]),
       noteTitle: new FormControl(null, [Validators.required]),
       noteText: new FormControl(null, [Validators.required]),
-      noteAuthor: new FormControl(null, [Validators.required])
+      noteAuthor: new FormControl(null, [Validators.required]),
+      noteColor: new FormControl(null)
     })
 
     this.folderForm.controls['folderParent'].setValue(this.parentFolderId)
+    this.folderForm.controls['folderColor'].setValue('')
     this.noteForm.controls['noteParent'].setValue(this.parentFolderId)
+    this.noteForm.controls['noteColor'].setValue('')
   }
 }

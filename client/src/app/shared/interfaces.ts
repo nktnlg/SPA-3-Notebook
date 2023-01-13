@@ -16,7 +16,8 @@ export interface Folder {
     title: string,
     author: string,
     date: Date,
-    parentFolderId: string
+    parentFolderId: string,
+    color?: string
 }
 
 export interface Note {
@@ -26,7 +27,8 @@ export interface Note {
     author: string,
     date: Date,
     parentFolderId: string,
-    parentFolderName?: string
+    parentFolderName?: string,
+    color?: string
 }
 
 export interface FbAuthResponse {

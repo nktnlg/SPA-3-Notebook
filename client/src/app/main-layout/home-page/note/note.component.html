@@ -1,4 +1,16 @@
-<div class="card" (click)="goToNote(note.id)">
+<div 
+class="card" 
+(click)="goToNote(note.id)"
+[ngClass]="{
+    'card-red': note.color === 'red',
+    'card-orange': note.color === 'orange',
+    'card-yellow': note.color === 'yellow',
+    'card-green': note.color === 'green',
+    'card-cyan': note.color === 'cyan',
+    'card-violet': note.color === 'violet',
+    'card-rose': note.color === 'rose'
+}"
+>
     <div class="note-header">
         <h2>{{note.title}}</h2>
     </div>
