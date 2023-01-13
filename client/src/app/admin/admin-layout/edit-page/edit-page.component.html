@@ -1,5 +1,9 @@
-<div *ngIf="form; else loading">
-    <form class="card content-form" [formGroup]="form" (ngSubmit)="submit()">
+<div *ngIf="form && note; else loading">
+    <form 
+    class="card content-form" 
+    [formGroup]="form" 
+    (ngSubmit)="submit()"
+    >
         <h1>Edit note</h1>
         <div id="form-title" class="form-control" [ngClass]="{invalid: form.get('title')?.touched && form.get('title')?.invalid}">
             <input id="form-title-input" name="form-title-input" formControlName="title" class="form-input" type="text" placeholder="Title">
@@ -15,9 +19,22 @@
         </div>
         <div class="form-control">
             <div>Parent Folder</div>
-            <select formControlName="folder" *ngIf="folders$ | async as folders;" name="form-folder-selection" id="form-folder-selection" class="form-folder-selection">
+            <select formControlName="folder" *ngIf="folders$ | async as folders;" name="form-folder-selection" id="form-folder-selection" class="form-selection">
                 <option value="none">Root folder</option>
                 <option *ngFor="let folder of folders" [value]="folder.id">{{folder.title}}</option>
+            </select>
+        </div>
+        <div class="form-control">
+            <div>Choose Color</div>
+            <select formControlName="color" name="form-color-selection" id="form-color-selection" class="form-selection">
+                <option value="">Gray</option>
+                <option value="red">Red</option>
+                <option value="orange">Orange</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="cyan">Cyan</option>
+                <option value="violet">Violet</option>
+                <option value="rose">Rose</option>
             </select>
         </div>
     

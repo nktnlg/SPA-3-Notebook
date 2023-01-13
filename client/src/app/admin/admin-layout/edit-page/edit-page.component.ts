@@ -37,7 +37,8 @@ export class EditPageComponent implements OnInit, OnDestroy{
       ...this.note,
       text: this.form.value.text,
       title: this.form.value.title,
-      parentFolderId: this.form.value.folder
+      parentFolderId: this.form.value.folder,
+      color: this.form.value.color
     }).subscribe(()=>{this.load = false; this.alertService.success('Note edited'); console.log(this.form.value.folder)})
   };
 
@@ -52,7 +53,8 @@ export class EditPageComponent implements OnInit, OnDestroy{
         this.form = new FormGroup({
           title: new FormControl(note.title, Validators.required),
           text: new FormControl(note.text, Validators.required),
-          folder: new FormControl(note.parentFolderId, Validators.required)
+          folder: new FormControl(note.parentFolderId, Validators.required),
+          color: new FormControl(note.color)
     })}, 
       (error)=>{
         this.router.navigate(['/admin', 'dashboard']);

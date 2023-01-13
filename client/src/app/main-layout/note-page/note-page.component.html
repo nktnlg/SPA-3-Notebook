@@ -2,7 +2,18 @@
     <button class="btn top-btn" (click)="goBack()">Return</button>
     <button *ngIf="logged" class="btn top-btn" (click)="goToEdit()">Edit Note</button>
 </div>
-<div class="card"  *ngIf="note; else loading">
+<div 
+class="card"  
+*ngIf="note; else loading"
+[ngClass]="{
+    'card-red': note.color === 'red',
+    'card-orange': note.color === 'orange',
+    'card-yellow': note.color === 'yellow',
+    'card-green': note.color === 'green',
+    'card-cyan': note.color === 'cyan',
+    'card-violet': note.color === 'violet',
+    'card-rose': note.color === 'rose'
+}">
     <div class="note-header">
         <h2>{{note.title}}</h2>
     </div>
@@ -18,6 +29,7 @@
     </div>
 
 </div>
+
 <ng-template #loading>
     <div class="load"></div>
 </ng-template>
