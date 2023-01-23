@@ -34,6 +34,21 @@ export class NotesService {
             })
         )
     }
+//perPage: number, pageNum: number
+    getNotesPagination(limit: number): Observable<Note[]>{
+        return this.http.get<FbGetNotesResponse>(`${environment.fbDBUrl}/notes.json?orderBy="date"&limitToFirst=${limit}`)
+        .pipe(
+            map((res: FbGetNotesResponse)=>{
+                return Object.keys(res).map(key=>({
+                    ...res[key],
+                    id: key,
+                    date: new Date(res[key].date)
+                }))
+            }),
+            map((res)=>{return res.sort((a, b) => (a.date > b.date) ? 1 : -1)}),
+
+        )
+    }
 
     getNotesByFolderId(folderId: string): Observable<Note[]>{
         return this.http.get<FbGetNotesResponse>(`${environment.fbDBUrl}/notes.json`)

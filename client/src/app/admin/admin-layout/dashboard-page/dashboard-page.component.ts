@@ -16,6 +16,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy{
   modal: string | null = '';
   switchModal(noteId: string| undefined){if(noteId){this.modal = noteId}else{this.modal = null}}
   notes: Note[] = [];
+  itemsLimit = 5;
   notesSub: Subscription|undefined;
   deleteSub: Subscription|undefined;
   searchNotes = '';
@@ -25,6 +26,18 @@ export class DashboardPageComponent implements OnInit, OnDestroy{
     private foldersService: FoldersService,
     private alertService: AlertService,
     private router: Router){}
+
+  showMore(){
+    this.itemsLimit += 5
+    this.notesSub = this.notesService.getNotesPagination(this.itemsLimit).subscribe(notes => {
+      this.notes = notes.map(localNote => {
+        let note: Note = localNote
+        const sub = this.foldersService.getFolderById(localNote.parentFolderId)
+        .subscribe(folder => note.parentFolderName = folder.title)
+        return note
+      })
+    })
+  }
 
 
   goToNoteEdit(id: string | undefined){
@@ -45,12 +58,12 @@ export class DashboardPageComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
-    this.notesSub = this.notesService.getNotes().subscribe(notes => {
-      this.notes = notes
-      this.notes.map(localNote => {
+    this.notesSub = this.notesService.getNotesPagination(this.itemsLimit).subscribe(notes => {
+      this.notes = notes.map(localNote => {
+        let note: Note = localNote
         const sub = this.foldersService.getFolderById(localNote.parentFolderId)
-        .subscribe(folder => localNote.parentFolderName = folder.title)
-        sub.unsubscribe();
+        .subscribe(folder => note.parentFolderName = folder.title)
+        return note
       })
     })
   }

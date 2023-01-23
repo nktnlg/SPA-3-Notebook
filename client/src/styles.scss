@@ -12,14 +12,16 @@ $base-rose: rgb(255, 190, 255);
 
 
 //GRAY THEME
-$text-color: #333;
+$text-color: #000;
 $text-secondary-color: #666;
-$text-ghost: #999;
+$text-ghost: $text-color;
 $border-color-ghost: #aaa;
-$border-color: #ccc;
+
+$base-element-color: #89cd5d;
+$contrast-element-color: #dabcff;
+$border-color: #6a329f;;
 $hover-base-color: #eee;
-$base-element-color: #f3f3f3;
-$contrast-element-color: white;
+
 $alert-color: red;
 
 //ORANGE THEME
@@ -48,7 +50,7 @@ $alert-color: red;
 body {
     font-family: sans-serif;
     margin: 0;
-    background: $contrast-element-color;
+    background: $border-color;
 }
 
 h1 {
@@ -62,7 +64,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: $base-element-color;
+    background-color: $contrast-element-color;
     color: $text-color;
     box-shadow: 0 8px 10px -4px rgb(0 0 0 / 0.1), 0 4px 6px -5px rgb(0 0 0 / 0.1);
     margin-bottom: 1rem;
@@ -504,7 +506,7 @@ h1 {
     margin: auto;
     border: 1rem solid $hover-base-color;
     border-radius: 50%;
-    border-top: 1rem solid $text-secondary-color;
+    border-top: 1rem solid $border-color;
     width: 10rem;
     height: 10rem;
     animation: rotate 2s linear infinite;
