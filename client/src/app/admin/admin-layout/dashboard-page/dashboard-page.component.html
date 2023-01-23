@@ -29,6 +29,9 @@
             </tr>
         </tbody>
     </table>
+    <div class="top-btn-div">
+        <button class="btn top-btn" style="margin-top: 1rem;" *ngIf="notes.length === itemsLimit" (click)="showMore()">Show more</button>
+    </div>
 </div>
 <ng-template #loading>
     <div class="load"></div>
